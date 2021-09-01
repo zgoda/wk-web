@@ -12,19 +12,21 @@ const proxy = createProxyMiddleware({
 });
 
 // Full list of options: https://wmr.dev/docs/configuration
-export default defineConfig({
-  /* Your configuration here */
-  alias: {
-    react: 'preact/compat',
-    'react-dom': 'preact/compat'
-  },
-  middleware: [
-    (req, res, next) => {
-      if (req.path.match(/^\/api(\/|$)/)) {
-        proxy(req, res, next);
-      } else {
-        next();
+export default defineConfig((options) => {
+  return {
+    /* Your configuration here */
+    alias: {
+      react: 'preact/compat',
+      'react-dom': 'preact/compat'
+    },
+    middleware: [
+      (req, res, next) => {
+        if ((req.path.match(/^\/api(\/|$)/)) && options.mode !== 'build') {
+          proxy(req, res, next);
+        } else {
+          next();
+        }
       }
-    }
-  ]
+    ]
+  };
 });
