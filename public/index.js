@@ -10,7 +10,7 @@ const About = lazy(() => import('./pages/about/index.js'));
 export function App() {
   return (
     <LocationProvider>
-      <div class="app">
+      <main class="container">
         <Header />
         <ErrorBoundary>
           <Router>
@@ -19,7 +19,7 @@ export function App() {
             <Route default component={NotFound} />
           </Router>
         </ErrorBoundary>
-      </div>
+      </main>
     </LocationProvider>
   );
 }

@@ -1,18 +1,17 @@
-import { useLocation } from 'preact-iso';
+import { Home } from 'preact-feather';
 
 export default function Header() {
-  const { url } = useLocation();
   return (
     <header>
       <nav>
-        <a href="/">Home</a>
-        <a href="/about">About</a>
-        <a href="/error">Error</a>
+        <ul>
+          <li><a href="/" aria-label="Początek"><strong><Home /></strong></a></li>
+        </ul>
+        <ul>
+          <li><a href="/about">About</a></li>
+          <li><a href="/error">Error</a></li>
+        </ul>
       </nav>
-      <label>
-        URL:
-        <input readonly value={url} ref={c => c && (c.size = c.value.length)} />
-      </label>
     </header>
   );
 }
