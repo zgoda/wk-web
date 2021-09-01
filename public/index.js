@@ -1,11 +1,11 @@
 import {
   LocationProvider, Router, Route, lazy, ErrorBoundary, hydrate, prerender as ssr
 } from 'preact-iso';
-import Home from './pages/home/index.js';
-import NotFound from './pages/_404.js';
 import Header from './header.js';
 
+const Home = lazy(() => import('./pages/home/index.js'));
 const About = lazy(() => import('./pages/about/index.js'));
+const NotFound = lazy(() => import('./pages/_404.js'));
 
 export function App() {
   return (
@@ -14,7 +14,7 @@ export function App() {
         <Header />
         <ErrorBoundary>
           <Router>
-            <Route path="/" component={Home} />
+            <Home path="/" />
             <Route path="/about" component={About} />
             <Route default component={NotFound} />
           </Router>
