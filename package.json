@@ -18,6 +18,6 @@
     "eslint-config-preact": "^1.1.4",
     "http-proxy-middleware": "^2.0.1",
     "sass": "^1.38.2",
-    "wmr": "^3.5.1"
+    "wmr": "^3.6.0"
   }
 }
