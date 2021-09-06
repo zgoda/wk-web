@@ -1,5 +1,11 @@
 import {
-  LocationProvider, Router, Route, lazy, ErrorBoundary, hydrate, prerender as ssr
+  LocationProvider,
+  Router,
+  Route,
+  lazy,
+  ErrorBoundary,
+  hydrate,
+  prerender as ssr,
 } from 'preact-iso';
 import Header from './header.js';
 

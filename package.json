@@ -5,20 +5,20 @@
     "build": "wmr build --prerender",
     "serve": "wmr serve"
   },
-  "eslintConfig": {
-    "extends": "preact"
-  },
   "dependencies": {
     "@picocss/pico": "^1.3.3",
     "preact": "^10.5.14",
     "preact-feather": "^4.2.1",
-    "preact-iso": "^2.1.0"
+    "preact-iso": "^2.2.0"
   },
   "devDependencies": {
     "eslint": "^7.32.0",
     "eslint-config-preact": "^1.1.4",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
     "http-proxy-middleware": "^2.0.1",
-    "sass": "^1.38.2",
-    "wmr": "^3.6.1"
+    "prettier": "^2.3.2",
+    "sass": "^1.39.0",
+    "wmr": "^3.7.0"
   }
 }
