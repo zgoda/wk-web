@@ -9,8 +9,8 @@ import {
 } from 'preact-iso';
 import Header from './header.js';
 
-const Home = lazy(() => import('./pages/home/index.js'));
-const About = lazy(() => import('./pages/about/index.js'));
+const Home = lazy(() => import('./pages/home.js'));
+const About = lazy(() => import('./pages/about.js'));
 const NotFound = lazy(() => import('./pages/_404.js'));
 
 export function App() {
