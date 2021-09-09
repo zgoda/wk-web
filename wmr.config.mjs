@@ -7,7 +7,7 @@ const proxy = createProxyMiddleware({
   logLevel: 'debug',
   target: 'http://localhost:5000',
   pathRewrite: {
-    '/api': ''
+    '/api': '/api',
   },
 });
 
@@ -17,16 +17,16 @@ export default defineConfig((options) => {
     /* Your configuration here */
     alias: {
       react: 'preact/compat',
-      'react-dom': 'preact/compat'
+      'react-dom': 'preact/compat',
     },
     middleware: [
       (req, res, next) => {
-        if ((req.path.match(/^\/api(\/|$)/)) && options.mode !== 'build') {
+        if (req.path.match(/^\/api(\/|$)/) && options.mode !== 'build') {
           proxy(req, res, next);
         } else {
           next();
         }
-      }
-    ]
+      },
+    ],
   };
 });

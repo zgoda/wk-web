@@ -5,3 +5,7 @@ $primary-600: #546e7a;
 $primary-700: #455a64;
 
 @import "../node_modules/@picocss/pico/scss/pico.scss";
+
+button {
+  width: auto;
+}
