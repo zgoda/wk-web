@@ -7,7 +7,7 @@ import {
   hydrate,
   prerender as ssr,
 } from 'preact-iso';
-import Header from './header.js';
+import { Header } from './header.js';
 
 const Home = lazy(() => import('./pages/home.js'));
 const About = lazy(() => import('./pages/about.js'));

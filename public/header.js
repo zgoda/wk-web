@@ -1,6 +1,6 @@
 import { Home } from 'preact-feather';
 
-export default function Header() {
+export function Header() {
   return (
     <header>
       <nav>
