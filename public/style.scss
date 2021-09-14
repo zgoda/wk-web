@@ -6,6 +6,6 @@ $primary-700: #455a64;
 
 @import "../node_modules/@picocss/pico/scss/pico.scss";
 
-button {
+.autowidth {
   width: auto;
 }

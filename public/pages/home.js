@@ -21,7 +21,7 @@ export default function Home() {
         <p>This is the home page.</p>
         <div class="grid">
           <div>
-            <button onClick={() => setCount(count - 1)}>
+            <button class="autowidth" onClick={() => setCount(count - 1)}>
               <Minus />
             </button>
           </div>
@@ -29,7 +29,7 @@ export default function Home() {
             <output>Count: {count}</output>
           </div>
           <div>
-            <button onClick={() => setCount(count + 1)}>
+            <button class="autowidth" onClick={() => setCount(count + 1)}>
               <Plus />
             </button>
           </div>
@@ -38,7 +38,9 @@ export default function Home() {
       <section>
         <h2>A little clicky</h2>
         <p>
-          <button onClick={() => talkToApi()}>Click me!</button>
+          <button class="autowidth" onClick={() => talkToApi()}>
+            Click me!
+          </button>
         </p>
         <p>{result}</p>
       </section>
