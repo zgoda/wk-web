@@ -20,6 +20,9 @@ export function Header() {
           <li>
             <a href="/error">Error</a>
           </li>
+          <li>
+            <a href="/login">Zaloguj</a>
+          </li>
         </ul>
       </nav>
     </header>

@@ -12,6 +12,7 @@ import { Header } from './header.js';
 const Home = lazy(() => import('./pages/home.js'));
 const About = lazy(() => import('./pages/about.js'));
 const NotFound = lazy(() => import('./pages/_404.js'));
+const Login = lazy(() => import('./pages/login.js'));
 
 export function App() {
   return (
@@ -22,6 +23,7 @@ export function App() {
           <Router>
             <Home path="/" />
             <Route path="/about" component={About} />
+            <Route path="/login" component={Login} />
             <Route default component={NotFound} />
           </Router>
         </ErrorBoundary>
