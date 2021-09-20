@@ -8,6 +8,7 @@ const proxy = createProxyMiddleware({
   target: 'http://localhost:5000',
   pathRewrite: {
     '/api': '/api',
+    '/auth': '/auth',
   },
 });
 
@@ -21,7 +22,7 @@ export default defineConfig((options) => {
     },
     middleware: [
       (req, res, next) => {
-        if (req.path.match(/^\/api(\/|$)/) && options.mode !== 'build') {
+        if (req.path.match(/^\/api|auth(\/|$)/) && options.mode !== 'build') {
           proxy(req, res, next);
         } else {
           next();
