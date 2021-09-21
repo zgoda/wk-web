@@ -1,34 +1,32 @@
-import { useStoreon } from '../index';
 import { useCallback, useState } from 'preact/hooks';
-import Cookies from 'universal-cookie';
+import { login } from '../utils/auth';
+import { useStoreon } from '../utils/state';
 
 export default function Login() {
-  const cookies = new Cookies();
   const { dispatch } = useStoreon('tokens');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
   const onReceiveToken = useCallback(
     (/** @type {String} */ token) => dispatch('csrftoken/set', token),
     [dispatch],
   );
+
   const formSubmit = async (
     /** @type {import("preact").JSX.TargetedEvent<HTMLFormElement, Event>} */ e,
   ) => {
     e.preventDefault();
-    const url = '/auth/v1/login';
-    const resp = await fetch(url, {
-      method: 'POST',
-      credentials: 'same-origin',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email, password }),
-    });
-    if (resp.ok) {
-      const token = cookies.get('csrf_refresh_token');
+    const res = await login(email, password);
+    const token = res.get('csrf_refresh_token');
+    if (token != null && typeof token === 'string') {
       onReceiveToken(token);
     }
+    const err = res.get('error');
+    if (err != null) {
+      console.error('(%d) %s', res.get('status'), err);
+    }
   };
+
   return (
     <section>
       <h1>Login form</h1>

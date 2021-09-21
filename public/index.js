@@ -7,20 +7,15 @@ import {
   hydrate,
   prerender as ssr,
 } from 'preact-iso';
-import { createContext } from 'preact';
-import { customContext } from 'storeon/preact';
 
 import { Header } from './header.js';
 import { store } from './state';
+import { CustomContext } from './utils/state';
 
 const Home = lazy(() => import('./pages/home.js'));
 const About = lazy(() => import('./pages/about.js'));
 const NotFound = lazy(() => import('./pages/_404.js'));
 const Login = lazy(() => import('./pages/login.js'));
-
-const CustomContext = createContext(store);
-
-export const useStoreon = customContext(CustomContext);
 
 export function App() {
   return (
