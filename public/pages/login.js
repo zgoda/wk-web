@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { useStoreon } from '../index';
 import { useCallback, useState } from 'preact/hooks';
 import Cookies from 'universal-cookie';
@@ -9,10 +8,12 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const onReceiveToken = useCallback(
-    (token) => dispatch('csrftoken/set', token),
+    (/** @type {String} */ token) => dispatch('csrftoken/set', token),
     [dispatch],
   );
-  const formSubmit = async (e) => {
+  const formSubmit = async (
+    /** @type {import("preact").JSX.TargetedEvent<HTMLFormElement, Event>} */ e,
+  ) => {
     e.preventDefault();
     const url = '/auth/v1/login';
     const resp = await fetch(url, {
@@ -38,6 +39,7 @@ export default function Login() {
             <input
               type="text"
               value={email}
+              // @ts-ignore
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email"
             />
@@ -47,6 +49,7 @@ export default function Login() {
             <input
               type="password"
               value={password}
+              // @ts-ignore
               onChange={(e) => setPassword(e.target.value)}
             />
           </label>
