@@ -1,10 +1,14 @@
 import { createStoreon } from 'storeon';
 
+/**
+ * @param {import('storeon').StoreonStore} store
+ */
 export function tokens(store) {
-  store.on('@init', () => ({ token: '' }));
-  // eslint-disable-next-line no-unused-vars
-  store.on('token/set', ({ _ }, newToken) => {
-    return { token: newToken };
+  store.on('@init', () => ({
+    csrfToken: '',
+  }));
+  store.on('csrftoken/set', ({ _ }, newToken) => {
+    return { csrfToken: newToken };
   });
 }
 

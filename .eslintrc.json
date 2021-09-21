@@ -11,5 +11,8 @@
   "ignorePatterns": [
     "build/",
     "dist/"
-  ]
+  ],
+  "rules": {
+    "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }]
+  }
 }

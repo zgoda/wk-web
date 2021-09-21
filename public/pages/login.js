@@ -9,7 +9,7 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const onReceiveToken = useCallback(
-    (token) => dispatch('tokens/set', token),
+    (token) => dispatch('csrftoken/set', token),
     [dispatch],
   );
   const formSubmit = async (e) => {
@@ -23,11 +23,10 @@ export default function Login() {
       },
       body: JSON.stringify({ email, password }),
     });
-    const text = await resp.text();
-    console.log(cookies.get('csrf_refresh_token'));
-    console.log(text);
-    const data = JSON.parse(text);
-    onReceiveToken(data.access_token);
+    if (resp.ok) {
+      const token = cookies.get('csrf_refresh_token');
+      onReceiveToken(token);
+    }
   };
   return (
     <section>
