@@ -58,7 +58,9 @@ export default function Login() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </label>
-          <button type="submit">Login</button>
+          <button class="autowidth" type="submit">
+            Login
+          </button>
         </form>
       </article>
     </section>
