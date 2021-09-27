@@ -8,9 +8,8 @@ export default function Login() {
   const [password, setPassword] = useState('');
 
   const onReceiveToken = useCallback(
-    (/** @type {String} */ token, /** @type {String} */ tokenType) => {
-      const action = `${tokenType}token/set`;
-      dispatch(action, token);
+    (/** @type {string} */ token, /** @type {string} */ tokenType) => {
+      dispatch(`${tokenType}token/set`, token);
     },
     [dispatch],
   );
@@ -20,16 +19,17 @@ export default function Login() {
   ) => {
     e.preventDefault();
     const res = await login(email, password);
-    let token = res.get('csrf_refresh_token');
-    if (token != null && typeof token === 'string') {
-      onReceiveToken(token, 'csrf');
-    }
-    token = res.get('access_token');
-    if (token != null && typeof token === 'string') {
-      onReceiveToken(token, 'access');
-    }
     const err = res.get('error');
-    if (err != null) {
+    if (!err) {
+      let token = res.get('csrf_refresh_token');
+      if (token != null) {
+        onReceiveToken(token.toString(), 'csrf');
+      }
+      token = res.get('access_token');
+      if (token != null) {
+        onReceiveToken(token.toString(), 'access');
+      }
+    } else {
       console.error('(%d) %s', res.get('status'), err);
     }
   };
