@@ -24,7 +24,7 @@ async function parseResponse(resp) {
  * @return {Promise<Map<string, string|number>>}
  */
 export async function login(email, password) {
-  const url = '/auth/v1/login';
+  const url = '/auth/login';
   const resp = await fetch(url, {
     method: 'POST',
     credentials: 'same-origin',
@@ -41,7 +41,7 @@ export async function login(email, password) {
  * @return {Promise<Map<string, string|number>>}
  */
 export async function reauthenticate() {
-  const url = '/auth/v1/refresh';
+  const url = '/auth/refresh';
   const resp = await fetch(url, {
     method: 'POST',
     credentials: 'same-origin',

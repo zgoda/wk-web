@@ -7,8 +7,8 @@ const proxy = createProxyMiddleware({
   logLevel: 'debug',
   target: 'http://localhost:5000',
   pathRewrite: {
-    '/api': '/api',
-    '/auth': '/auth',
+    '/api': '/v1/api',
+    '/auth': '/v1/auth',
   },
 });
 

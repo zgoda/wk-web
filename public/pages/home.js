@@ -8,7 +8,7 @@ export default function Home() {
   const talkToApi = async () => {
     const url = '/api/hello';
     const resp = await fetch(url, {
-      credentials: 'include',
+      credentials: 'same-origin',
     });
     const msgData = await resp.json();
     setResult(msgData.message);
