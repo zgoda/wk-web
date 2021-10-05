@@ -3,7 +3,7 @@ import { createProxyMiddleware } from 'http-proxy-middleware';
 
 const proxy = createProxyMiddleware({
   changeOrigin: true,
-  ws: true,
+  ws: false,
   logLevel: 'debug',
   target: 'http://localhost:5000',
   pathRewrite: {

@@ -9,7 +9,7 @@ export function tokens(store) {
     accessToken: '',
   }));
   store.on('csrftoken/set', ({ newToken }) => ({ csrfToken: newToken }));
-  store.on('accesstoken/set', ({ newToken }) => ({ csrfToken: newToken }));
+  store.on('accesstoken/set', ({ newToken }) => ({ accessToken: newToken }));
 }
 
 export const store = createStoreon([tokens]);

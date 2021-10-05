@@ -12,6 +12,9 @@ import { Header } from './header.js';
 import { store } from './state';
 import { CustomContext } from './utils/state';
 
+import '@csstools/normalize.css/normalize.css';
+import './style.scss';
+
 const Home = lazy(() => import('./pages/home.js'));
 const About = lazy(() => import('./pages/about.js'));
 const NotFound = lazy(() => import('./pages/_404.js'));
