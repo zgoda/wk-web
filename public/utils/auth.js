@@ -1,11 +1,11 @@
-import Cookies from 'universal-cookie';
+import Cookie from 'cookie-universal';
 
 /**
  * @param {Response} resp
  * @return {Promise<Map<string, string|number>>}
  */
 async function parseResponse(resp) {
-  const cookies = new Cookies();
+  const cookies = Cookie();
   const result = new Map();
   result.set('status', resp.status);
   const data = await resp.json();
