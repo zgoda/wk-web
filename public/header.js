@@ -7,7 +7,7 @@ function LoginLink({ isAuthenticated }) {
   if (isAuthenticated) {
     return <a href="/logout">Wyloguj</a>;
   }
-  return <a href="/login">Zaloguj</a>;
+  return <a href="/login">Strona logowania</a>;
 }
 
 export function Header() {
@@ -16,29 +16,21 @@ export function Header() {
   const isAuthenticated = checkAuth(csrfToken, accessToken);
 
   return (
-    <header>
-      <nav>
-        <ul>
-          <li>
-            <a href="/" aria-label="Początek">
-              <strong>
-                <Home />
-              </strong>
-            </a>
-          </li>
-        </ul>
-        <ul>
-          <li>
-            <a href="/about">About</a>
-          </li>
-          <li>
-            <a href="/error">Error</a>
-          </li>
-          <li>
-            <LoginLink isAuthenticated={isAuthenticated} />
-          </li>
-        </ul>
-      </nav>
-    </header>
+    <nav class="container">
+      <ul>
+        <li>
+          <a href="/" aria-label="Początek">
+            <strong>
+              <Home />
+            </strong>
+          </a>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <LoginLink isAuthenticated={isAuthenticated} />
+        </li>
+      </ul>
+    </nav>
   );
 }

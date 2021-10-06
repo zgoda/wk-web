@@ -38,6 +38,25 @@ async function login(email, password) {
 }
 
 /**
+ * @param {String} email
+ * @param {String} password
+ * @returns {Promise<Map<string, string|number>>}
+ */
+async function register(email, password) {
+  const url = '/auth/register';
+  const resp = await fetch(url, {
+    method: 'POST',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ email, password }),
+  });
+  const result = await parseResponse(resp);
+  return result;
+}
+
+/**
  * @returns {Promise<Map<string, string|number>>}
  */
 async function reauthenticate() {
@@ -66,4 +85,4 @@ function isAuthenticated(csrfToken, accessToken) {
   return csrfToken != null && accessToken != null;
 }
 
-export { login, reauthenticate, isAuthenticated };
+export { login, register, reauthenticate, isAuthenticated };

@@ -2,11 +2,32 @@ import text from './home.json';
 
 export default function Home() {
   return (
-    <section>
-      <h1>Wymarsze kwartalne</h1>
-      {text.intro.map((line, index) => (
-        <p key={`intro-l-${index}`}>{line}</p>
-      ))}
-    </section>
+    <>
+      <section>
+        <h1>{text.title}</h1>
+        {text.intro.map((line, index) => (
+          <p key={`intro-l-${index}`}>{line}</p>
+        ))}
+      </section>
+      <section>
+        <h2>Jak to działa?</h2>
+        <ul>
+          <li>
+            <a href="/login">logujesz się</a>
+          </li>
+          <li>wybierasz marsz do którego chcesz dołączyć...</li>
+          <li>...albo zgłaszasz swój własny</li>
+          <li>idziesz tempem jakie lubisz</li>
+          <li>
+            zdajesz relację (zdjęcia, film, opis słowno-muzyczny, zapis trasy z GPS, co
+            chcesz)
+          </li>
+          <li>...i za jakiś czas powtórka</li>
+        </ul>
+        <p>
+          Prawda że prościej się nie da? No to <strong>przejdźmy się</strong>!
+        </p>
+      </section>
+    </>
   );
 }
