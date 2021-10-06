@@ -1,6 +1,20 @@
 import { Home } from 'preact-feather';
 
+import { useStoreon } from './utils/state';
+import { isAuthenticated as checkAuth } from './utils/auth';
+
+function LoginLink({ isAuthenticated }) {
+  if (isAuthenticated) {
+    return <a href="/logout">Wyloguj</a>;
+  }
+  return <a href="/login">Zaloguj</a>;
+}
+
 export function Header() {
+  const { csrfToken, accessToken } = useStoreon('csrfToken', 'accessToken');
+
+  const isAuthenticated = checkAuth(csrfToken, accessToken);
+
   return (
     <header>
       <nav>
@@ -21,7 +35,7 @@ export function Header() {
             <a href="/error">Error</a>
           </li>
           <li>
-            <a href="/login">Zaloguj</a>
+            <LoginLink isAuthenticated={isAuthenticated} />
           </li>
         </ul>
       </nav>
