@@ -1,4 +1,5 @@
 import { createStoreon } from 'storeon';
+import { storeonDevtools } from 'storeon/devtools';
 
 /**
  * @param {import('storeon').StoreonStore} store
@@ -8,8 +9,11 @@ export function tokens(store) {
     csrfToken: '',
     accessToken: '',
   }));
-  store.on('csrftoken/set', ({ newToken }) => ({ csrfToken: newToken }));
-  store.on('accesstoken/set', ({ newToken }) => ({ accessToken: newToken }));
+  store.on('csrftoken/set', (_state, newToken) => ({ csrfToken: newToken }));
+  store.on('accesstoken/set', (_state, newToken) => ({ accessToken: newToken }));
 }
 
-export const store = createStoreon([tokens]);
+export const store = createStoreon([
+  tokens,
+  process.env.NODE_ENV !== 'production' && storeonDevtools,
+]);

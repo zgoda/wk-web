@@ -31,8 +31,10 @@ function FormBody({ email, emailSetter, password, passwordSetter, submitButtonTe
 
 export default function Login() {
   const { dispatch } = useStoreon('tokens');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [loginEmail, setLoginEmail] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
+  const [registerEmail, setRegisterEmail] = useState('');
+  const [registerPassword, setRegisterPassword] = useState('');
 
   const onReceiveToken = useCallback(
     (/** @type {string} */ token, /** @type {string} */ tokenType) => {
@@ -48,9 +50,9 @@ export default function Login() {
     e.preventDefault();
     let res;
     if (operation === 'login') {
-      res = await login(email, password);
+      res = await login(loginEmail, loginPassword);
     } else {
-      res = await register(email, password);
+      res = await register(loginEmail, loginPassword);
     }
     const err = res.get('error');
     if (!err) {
@@ -77,10 +79,10 @@ export default function Login() {
         <form onSubmit={(e) => formSubmit(e, 'login')}>
           <FormBody
             key="form-login"
-            email={email}
-            emailSetter={setEmail}
-            password={password}
-            passwordSetter={setPassword}
+            email={loginEmail}
+            emailSetter={setLoginEmail}
+            password={loginPassword}
+            passwordSetter={setLoginPassword}
             submitButtonText="Zaloguj"
           />
         </form>
@@ -93,10 +95,10 @@ export default function Login() {
         <form onSubmit={(e) => formSubmit(e, 'register')}>
           <FormBody
             key="form-register"
-            email={email}
-            emailSetter={setEmail}
-            password={password}
-            passwordSetter={setPassword}
+            email={registerEmail}
+            emailSetter={setRegisterEmail}
+            password={registerPassword}
+            passwordSetter={setRegisterPassword}
             submitButtonText="Zarejestruj"
           />
         </form>
