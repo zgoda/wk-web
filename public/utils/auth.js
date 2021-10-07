@@ -12,6 +12,8 @@ async function parseResponse(resp) {
     const cookies = Cookie();
     result.set('csrf_refresh_token', cookies.get('csrf_refresh_token'));
     result.set('access_token', data.access_token);
+    result.set('email', data.user.email);
+    result.set('name', data.user.name);
   } else {
     result.set('error', data.message);
   }
@@ -72,17 +74,4 @@ async function reauthenticate() {
   return result;
 }
 
-/**
- *
- * @param {string} csrfToken
- * @param {string} accessToken
- * @returns {boolean}
- */
-function isAuthenticated(csrfToken, accessToken) {
-  if ([csrfToken, accessToken].includes('')) {
-    return false;
-  }
-  return csrfToken != null && accessToken != null;
-}
-
-export { login, register, reauthenticate, isAuthenticated };
+export { login, register, reauthenticate };

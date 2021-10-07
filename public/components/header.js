@@ -1,7 +1,6 @@
 import { Home } from 'preact-feather';
 
 import { useStoreon } from '../utils/state';
-import { isAuthenticated as checkAuth } from '../utils/auth';
 
 function LoginLink({ isAuthenticated }) {
   if (isAuthenticated) {
@@ -22,9 +21,9 @@ function AccountElement({ isAuthenticated }) {
 }
 
 export function Header() {
-  const { csrfToken, accessToken } = useStoreon('csrfToken', 'accessToken');
+  const { currentUser } = useStoreon('currentUser');
 
-  const isAuthenticated = checkAuth(csrfToken, accessToken);
+  const isAuthenticated = currentUser != null;
 
   return (
     <nav class="container">
@@ -32,9 +31,12 @@ export function Header() {
         <li>
           <a href="/" aria-label="Początek">
             <strong>
-              <Home />
+              <Home size={32} />
             </strong>
           </a>
+        </li>
+        <li>
+          <a href="/events">Wydarzenia</a>
         </li>
       </ul>
       <ul>

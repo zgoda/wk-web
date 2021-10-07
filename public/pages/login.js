@@ -64,6 +64,7 @@ export default function Login() {
       if (token != null) {
         onReceiveToken(token.toString(), 'access');
       }
+      dispatch('user/set', { name: res.get('name'), email: res.get('email') });
     } else {
       console.error('(%d) %s', res.get('status'), err);
     }
