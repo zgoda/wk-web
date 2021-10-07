@@ -1,7 +1,7 @@
 import { Home } from 'preact-feather';
 
-import { useStoreon } from './utils/state';
-import { isAuthenticated as checkAuth } from './utils/auth';
+import { useStoreon } from '../utils/state';
+import { isAuthenticated as checkAuth } from '../utils/auth';
 
 function LoginLink({ isAuthenticated }) {
   if (isAuthenticated) {
