@@ -1,4 +1,6 @@
 import { useCallback, useState } from 'preact/hooks';
+import { useLocation } from 'preact-iso';
+
 import { login, register } from '../utils/auth';
 import { useStoreon } from '../utils/state';
 
@@ -36,6 +38,8 @@ export default function Login() {
   const [registerEmail, setRegisterEmail] = useState('');
   const [registerPassword, setRegisterPassword] = useState('');
 
+  const loc = useLocation();
+
   const onReceiveToken = useCallback(
     (/** @type {string} */ token, /** @type {string} */ tokenType) => {
       dispatch(`${tokenType}token/set`, token);
@@ -65,6 +69,7 @@ export default function Login() {
         onReceiveToken(token.toString(), 'access');
       }
       dispatch('user/set', { name: res.get('name'), email: res.get('email') });
+      loc.route('/');
     } else {
       console.error('(%d) %s', res.get('status'), err);
     }

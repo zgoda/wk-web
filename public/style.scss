@@ -53,3 +53,39 @@ $primary-700: #455a64;
     padding: 2rem;
   }
 }
+
+.alert {
+  padding: 20px;
+  color: white;
+  margin-bottom: 15px;
+}
+
+.alert-danger {
+  @extend .alert;
+  background-color: red;
+}
+
+.alert-warning {
+  @extend .alert;
+  background-color: goldenrod;
+}
+
+.alert-success {
+  @extend .alert;
+  background-color: green;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
+}
