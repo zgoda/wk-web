@@ -62,7 +62,7 @@ export default function Login() {
     } else {
       res = await register(registerEmail, registerPassword);
     }
-    if (res.error != null) {
+    if (res.ok) {
       if (res.csrfRefreshToken != null) {
         onReceiveToken(res.csrfRefreshToken, 'csrf');
       }
