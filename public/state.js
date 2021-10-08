@@ -6,12 +6,16 @@ import { storeonDevtools } from 'storeon/devtools';
  */
 export function tokens(store) {
   store.on('@init', () => ({
-    csrfToken: '',
+    csrfRefreshToken: '',
+    csrfAccessToken: '',
     accessToken: '',
     currentUser: null,
   }));
-  store.on('csrftoken/set', (_state, /** @type {string} */ newToken) => ({
-    csrfToken: newToken,
+  store.on('csrfrefreshtoken/set', (_state, /** @type {string} */ newToken) => ({
+    csrfRefreshToken: newToken,
+  }));
+  store.on('csrfaccesstoken/set', (_state, /** @type {string} */ newToken) => ({
+    csrfAccessToken: newToken,
   }));
   store.on('accesstoken/set', (_state, /** @type {string} */ newToken) => ({
     accessToken: newToken,

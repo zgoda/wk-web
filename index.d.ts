@@ -10,5 +10,6 @@ export interface AuthResult {
   error?: string;
   user?: User;
   accessToken?: string;
+  csrfAccessToken?: string;
   csrfRefreshToken?: string;
 }

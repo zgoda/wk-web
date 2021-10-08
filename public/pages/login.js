@@ -34,7 +34,7 @@ function FormBody({ email, emailSetter, password, passwordSetter, submitButtonTe
 }
 
 export default function Login() {
-  const { dispatch } = useStoreon('csrfRefreshToken');
+  const { dispatch } = useStoreon('csrfToken');
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
   const [registerEmail, setRegisterEmail] = useState('');
@@ -64,7 +64,10 @@ export default function Login() {
     }
     if (res.ok) {
       if (res.csrfRefreshToken != null) {
-        onReceiveToken(res.csrfRefreshToken, 'csrf');
+        onReceiveToken(res.csrfRefreshToken, 'csrfrefresh');
+      }
+      if (res.csrfAccessToken != null) {
+        onReceiveToken(res.csrfAccessToken, 'csrfaccess');
       }
       if (res.accessToken != null) {
         onReceiveToken(res.accessToken, 'access');

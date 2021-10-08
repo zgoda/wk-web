@@ -6,9 +6,9 @@ import { updateUser } from '../utils/user';
 import styles from './account.module.css';
 
 export default function Account() {
-  const { dispatch, currentUser, csrfToken, accessToken } = useStoreon(
+  const { dispatch, currentUser, csrfAccessToken, accessToken } = useStoreon(
     'currentUser',
-    'csrfToken',
+    'csrfAccessToken',
     'accessToken',
   );
   const [name, setName] = useState('');
@@ -21,7 +21,7 @@ export default function Account() {
   ) => {
     e.preventDefault();
     currentUser.name = name;
-    const updateOk = await updateUser(currentUser, accessToken, csrfToken);
+    const updateOk = await updateUser(currentUser, accessToken, csrfAccessToken);
     if (updateOk) {
       dispatch('user/set', currentUser);
       setShowSuccess(true);
