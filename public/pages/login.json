@@ -1,0 +1,20 @@
+{
+  "login": {
+    "title": "Zaloguj się",
+    "subtitle": "Jeżeli masz już u nas konto",
+    "submitButtonText": "Zaloguj"
+  },
+  "register": {
+    "title": "Załóż konto",
+    "subtitle": "Jeżeli chcesz dołączyć do naszej społeczności",
+    "submitButtonText": "Zarejestruj"
+  },
+  "form": {
+    "email": {
+      "label": "Email"
+    },
+    "password": {
+      "label": "Hasło"
+    }
+  }
+}

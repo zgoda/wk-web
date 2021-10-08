@@ -4,22 +4,23 @@ import { useLocation } from 'preact-iso';
 import { Alert } from '../components/alert';
 import { login, register } from '../utils/auth';
 import { useStoreon } from '../utils/state';
+import text from './login.json';
 
 function FormBody({ email, emailSetter, password, passwordSetter, submitButtonText }) {
   return (
     <>
       <label>
-        Email
+        {text.form.email.label}
         <input
           type="text"
           value={email}
           // @ts-ignore
           onChange={(e) => emailSetter(e.target.value)}
-          placeholder="Email"
+          placeholder={text.form.email.label}
         />
       </label>
       <label>
-        Hasło
+        {text.form.password.label}
         <input
           type="password"
           value={password}
@@ -85,8 +86,8 @@ export default function Login() {
       <article class="grid">
         <div>
           <hgroup>
-            <h2>Zaloguj się</h2>
-            <h3>Jeżeli masz już u nas konto</h3>
+            <h2>{text.login.title}</h2>
+            <h3>{text.login.subtitle}</h3>
           </hgroup>
           <form onSubmit={(e) => formSubmit(e, 'login')}>
             <FormBody
@@ -95,14 +96,14 @@ export default function Login() {
               emailSetter={setLoginEmail}
               password={loginPassword}
               passwordSetter={setLoginPassword}
-              submitButtonText="Zaloguj"
+              submitButtonText={text.login.submitButtonText}
             />
           </form>
         </div>
         <div>
           <hgroup>
-            <h2>Załóż konto</h2>
-            <h3>Jeżeli chcesz dołączyć do naszej społeczności</h3>
+            <h2>{text.register.title}</h2>
+            <h3>{text.register.subtitle}</h3>
           </hgroup>
           <form onSubmit={(e) => formSubmit(e, 'register')}>
             <FormBody
@@ -111,7 +112,7 @@ export default function Login() {
               emailSetter={setRegisterEmail}
               password={registerPassword}
               passwordSetter={setRegisterPassword}
-              submitButtonText="Zarejestruj"
+              submitButtonText={text.register.submitButtonText}
             />
           </form>
         </div>

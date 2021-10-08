@@ -15,7 +15,10 @@ export default function Home() {
         ))}
       </section>
       <section>
-        <h2>Jak to działa?</h2>
+        <header>
+          <h2>Jak to działa?</h2>
+        </header>
+        <p>To bardzo proste.</p>
         <ul>
           <li>
             <a href="/login">logujesz się</a>
