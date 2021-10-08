@@ -10,9 +10,15 @@ export function tokens(store) {
     accessToken: '',
     currentUser: null,
   }));
-  store.on('csrftoken/set', (_state, newToken) => ({ csrfToken: newToken }));
-  store.on('accesstoken/set', (_state, newToken) => ({ accessToken: newToken }));
-  store.on('user/set', (_state, user) => ({ currentUser: user }));
+  store.on('csrftoken/set', (_state, /** @type {string} */ newToken) => ({
+    csrfToken: newToken,
+  }));
+  store.on('accesstoken/set', (_state, /** @type {string} */ newToken) => ({
+    accessToken: newToken,
+  }));
+  store.on('user/set', (_state, /** @type {import('..').User} */ user) => ({
+    currentUser: user,
+  }));
 }
 
 export const store = createStoreon([

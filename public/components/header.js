@@ -2,6 +2,15 @@ import { Home } from 'preact-feather';
 
 import { useStoreon } from '../utils/state';
 
+/**
+ * @typedef {Object} ElementProps
+ * @property {boolean} isAuthenticated
+ */
+
+/**
+ * @param {ElementProps} props
+ * @returns {JSX.Element}
+ */
 function LoginLink({ isAuthenticated }) {
   if (isAuthenticated) {
     return <a href="/logout">Wyloguj</a>;
@@ -9,6 +18,10 @@ function LoginLink({ isAuthenticated }) {
   return <a href="/login">Strona logowania</a>;
 }
 
+/**
+ * @param {ElementProps} props
+ * @returns {JSX.Element | null}
+ */
 function AccountElement({ isAuthenticated }) {
   if (isAuthenticated) {
     return (

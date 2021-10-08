@@ -1,5 +1,13 @@
 import { useState } from 'preact/hooks';
 
+/**
+ * @typedef {Object} Props
+ * @property {string} style
+ * @property {string} text
+ *
+ * @param {Props} props
+ * @returns
+ */
 function Alert({ style, text }) {
   const [visible, setVisible] = useState(true);
 

@@ -2,20 +2,19 @@ import Cookie from 'cookie-universal';
 
 /**
  * @param {Response} resp
- * @returns {Promise<Map<string, string|number>>}
+ * @returns {Promise<import('../..').AuthResult>}
  */
 async function parseResponse(resp) {
-  const result = new Map();
-  result.set('status', resp.status);
+  /** @type {import('../..').AuthResult} */
+  const result = { status: resp.status, ok: resp.ok };
   const data = await resp.json();
   if (resp.ok) {
     const cookies = Cookie();
-    result.set('csrf_refresh_token', cookies.get('csrf_refresh_token'));
-    result.set('access_token', data.access_token);
-    result.set('email', data.user.email);
-    result.set('name', data.user.name);
+    result.csrfRefreshToken = cookies.get('csrf_refresh_token');
+    result.accessToken = data.access_token;
+    result.user = { ...data.user };
   } else {
-    result.set('error', data.message);
+    result.error = data.message;
   }
   return result;
 }
@@ -23,7 +22,7 @@ async function parseResponse(resp) {
 /**
  * @param {String} email
  * @param {String} password
- * @returns {Promise<Map<string, string|number>>}
+ * @returns {Promise<import('../..').AuthResult>}
  */
 async function login(email, password) {
   const url = '/auth/login';
@@ -42,7 +41,7 @@ async function login(email, password) {
 /**
  * @param {String} email
  * @param {String} password
- * @returns {Promise<Map<string, string|number>>}
+ * @returns {Promise<import('../..').AuthResult>}
  */
 async function register(email, password) {
   const url = '/auth/register';
@@ -59,7 +58,7 @@ async function register(email, password) {
 }
 
 /**
- * @returns {Promise<Map<string, string|number>>}
+ * @returns {Promise<import('../..').AuthResult>}
  */
 async function reauthenticate() {
   const url = '/auth/refresh';

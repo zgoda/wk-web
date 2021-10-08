@@ -8,7 +8,7 @@ import styles from './account.module.css';
 export default function Account() {
   const { dispatch, currentUser } = useStoreon('currentUser');
   const [name, setName] = useState('');
-  const [showAlert, setShowAlert] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   useEffect(() => setName(currentUser.name), [currentUser]);
 
@@ -20,16 +20,16 @@ export default function Account() {
     const updateOk = await updateUser(currentUser);
     if (updateOk) {
       dispatch('user/set', currentUser);
-      setShowAlert(true);
+      setShowSuccess(true);
     }
   };
 
   return (
     <section>
-      {showAlert && <Alert style="success" text="Dane użytkownika zapisane" />}
+      {showSuccess && <Alert style="success" text="Dane użytkownika zapisane" />}
       <header>
         <hgroup>
-          <h1>Konto użytkownika {currentUser.name}</h1>
+          <h1>Konto użytkownika {currentUser.email}</h1>
           <h2>Tutaj możesz zmienić swoje dane</h2>
         </hgroup>
       </header>

@@ -1,5 +1,5 @@
 /**
- * @param {{ email: string; name: string; }} user
+ * @param {import('../..').User} user
  * @returns Promise<boolean>
  */
 async function updateUser(user) {
@@ -12,10 +12,7 @@ async function updateUser(user) {
     },
     body: JSON.stringify({ name: user.name }),
   });
-  if (resp.ok) {
-    return true;
-  }
-  return false;
+  return resp.ok;
 }
 
 export { updateUser };

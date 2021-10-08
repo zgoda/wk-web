@@ -13,9 +13,15 @@
     "module": "esnext",
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
-    "downlevelIteration": true
+    "downlevelIteration": true,
+    "typeRoots": [
+      "./public/**/*"
+    ]
   },
-  "include": ["node_modules/wmr/types.d.ts", "**/*"],
+  "include": [
+    "node_modules/wmr/types.d.ts",
+    "**/*"
+  ],
   "typeAcquisition": {
     "enable": true
   }
