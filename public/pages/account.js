@@ -6,7 +6,10 @@ import { updateUser } from '../utils/user';
 import styles from './account.module.css';
 
 export default function Account() {
-  const { dispatch, currentUser } = useStoreon('currentUser');
+  const { dispatch, currentUser, csrfRefreshToken } = useStoreon(
+    'currentUser',
+    'csrfRefreshToken',
+  );
   const [name, setName] = useState('');
   const [showSuccess, setShowSuccess] = useState(false);
 
@@ -17,7 +20,7 @@ export default function Account() {
   ) => {
     e.preventDefault();
     currentUser.name = name;
-    const updateOk = await updateUser(currentUser);
+    const updateOk = await updateUser(currentUser, csrfRefreshToken);
     if (updateOk) {
       dispatch('user/set', currentUser);
       setShowSuccess(true);

@@ -1,5 +1,7 @@
 import Cookie from 'cookie-universal';
 
+import { buildPostRequest } from './http';
+
 /**
  * @param {Response} resp
  * @returns {Promise<import('../..').AuthResult>}
@@ -20,55 +22,36 @@ async function parseResponse(resp) {
 }
 
 /**
- * @param {String} email
- * @param {String} password
+ * @param {string} email
+ * @param {string} password
  * @returns {Promise<import('../..').AuthResult>}
  */
 async function login(email, password) {
   const url = '/auth/login';
-  const resp = await fetch(url, {
-    method: 'POST',
-    credentials: 'same-origin',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ email, password }),
-  });
+  const resp = await fetch(url, buildPostRequest(JSON.stringify({ email, password })));
   const result = await parseResponse(resp);
   return result;
 }
 
 /**
- * @param {String} email
- * @param {String} password
+ * @param {string} email
+ * @param {string} password
  * @returns {Promise<import('../..').AuthResult>}
  */
 async function register(email, password) {
   const url = '/auth/register';
-  const resp = await fetch(url, {
-    method: 'POST',
-    credentials: 'same-origin',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ email, password }),
-  });
+  const resp = await fetch(url, buildPostRequest(JSON.stringify({ email, password })));
   const result = await parseResponse(resp);
   return result;
 }
 
 /**
+ * @param {string} refreshToken
  * @returns {Promise<import('../..').AuthResult>}
  */
-async function reauthenticate() {
+async function reauthenticate(refreshToken) {
   const url = '/auth/refresh';
-  const resp = await fetch(url, {
-    method: 'POST',
-    credentials: 'same-origin',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
+  const resp = await fetch(url, buildPostRequest('', refreshToken));
   const result = await parseResponse(resp);
   return result;
 }

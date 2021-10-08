@@ -1,17 +1,16 @@
+import { buildPostRequest } from './http';
+
 /**
  * @param {import('../..').User} user
+ * @param {string} csrfToken
  * @returns Promise<boolean>
  */
-async function updateUser(user) {
+async function updateUser(user, csrfToken) {
   const url = `/api/user/${user.email}`;
-  const resp = await fetch(url, {
-    method: 'POST',
-    credentials: 'same-origin',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ name: user.name }),
-  });
+  const resp = await fetch(
+    url,
+    buildPostRequest(JSON.stringify({ name: user.name }), csrfToken),
+  );
   return resp.ok;
 }
 
