@@ -6,10 +6,6 @@ $primary-700: #455a64;
 
 @import "../node_modules/@picocss/pico/scss/pico.scss";
 
-.autowidth {
-  width: auto;
-}
-
 @media (min-width: 576px) {
 
   body > main {
@@ -55,9 +51,9 @@ $primary-700: #455a64;
 }
 
 .alert {
-  padding: 20px;
+  padding: 1rem;
   color: white;
-  margin-bottom: 15px;
+  margin-bottom: 1rem;
 }
 
 .alert-danger {
@@ -76,12 +72,12 @@ $primary-700: #455a64;
 }
 
 .closebtn {
-  margin-left: 15px;
+  margin-left: 1rem;
   color: white;
   font-weight: bold;
   float: right;
-  font-size: 22px;
-  line-height: 20px;
+  font-size: 1.5rem;
+  line-height: 1rem;
   cursor: pointer;
   transition: 0.3s;
 }

@@ -4,7 +4,12 @@ export default function Home() {
   return (
     <>
       <section>
-        <h1>{text.title}</h1>
+        <header>
+          <hgroup>
+            <h1>{text.title}</h1>
+            <h2>{text.subtitle}</h2>
+          </hgroup>
+        </header>
         {text.intro.map((line, index) => (
           <p key={`intro-l-${index}`}>{line}</p>
         ))}
