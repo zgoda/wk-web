@@ -12,3 +12,8 @@ export interface AuthResult {
   csrfAccessToken?: string;
   csrfRefreshToken?: string;
 }
+
+export interface UserUpdateResult {
+  status: boolean;
+  user: User;
+}

@@ -46,12 +46,12 @@ async function register(email, password) {
 }
 
 /**
- * @param {string} refreshToken
+ * @param {string} csrfRefreshToken
  * @returns {Promise<import('../..').AuthResult>}
  */
-async function reauthenticate(refreshToken) {
+async function reauthenticate(csrfRefreshToken) {
   const url = '/auth/refresh';
-  const resp = await fetch(url, buildPostRequest('', refreshToken));
+  const resp = await fetch(url, buildPostRequest('', csrfRefreshToken));
   const result = await parseResponse(resp);
   return result;
 }

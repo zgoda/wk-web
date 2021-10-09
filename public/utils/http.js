@@ -1,15 +1,15 @@
 /**
  *
  * @param {string} body
- * @param {string} [refreshToken]
+ * @param {string} [csrfToken]
  * @returns {RequestInit}
  */
-function buildPostRequest(body, refreshToken) {
+function buildPostRequest(body, csrfToken) {
   const headers = {
     'Content-Type': 'application/json',
   };
-  if (refreshToken != null) {
-    headers['X-CSRF-TOKEN'] = refreshToken;
+  if (csrfToken != null) {
+    headers['X-CSRF-TOKEN'] = csrfToken;
   }
   return {
     method: 'POST',

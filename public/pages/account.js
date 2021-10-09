@@ -20,9 +20,9 @@ export default function Account() {
   ) => {
     e.preventDefault();
     currentUser.name = name;
-    const updateOk = await updateUser(currentUser, csrfAccessToken);
-    if (updateOk) {
-      dispatch('user/set', currentUser);
+    const rv = await updateUser(currentUser, csrfAccessToken);
+    if (rv.status) {
+      dispatch('user/set', rv.user);
       setShowSuccess(true);
     }
   };
