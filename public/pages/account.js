@@ -7,9 +7,10 @@ import styles from './account.module.css';
 import text from './account.json';
 
 export default function Account() {
-  const { dispatch, currentUser, csrfAccessToken } = useStoreon(
+  const { dispatch, currentUser, csrfAccessToken, csrfRefreshToken } = useStoreon(
     'currentUser',
     'csrfAccessToken',
+    'csrfRefreshToken',
   );
   const [name, setName] = useState('');
   const [showSuccess, setShowSuccess] = useState(false);
@@ -21,9 +22,15 @@ export default function Account() {
   ) => {
     e.preventDefault();
     currentUser.name = name;
-    const rv = await updateUser(currentUser, csrfAccessToken);
+    const rv = await updateUser(currentUser, csrfAccessToken, csrfRefreshToken);
     if (rv.status) {
       dispatch('user/set', rv.user);
+      if (rv.csrfAccessToken != null) {
+        dispatch('csrfaccesstoken/set', rv.csrfAccessToken);
+      }
+      if (rv.csrfRefreshToken != null) {
+        dispatch('csrfrefreshtoken/set', rv.csrfRefreshToken);
+      }
       setShowSuccess(true);
     }
   };

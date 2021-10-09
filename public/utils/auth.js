@@ -1,6 +1,6 @@
 import Cookie from 'cookie-universal';
 
-import { buildPostRequest } from './http';
+import { buildPostRequest, request } from './http';
 
 /**
  * @param {Response} resp
@@ -28,8 +28,8 @@ async function parseResponse(resp) {
  */
 async function login(email, password) {
   const url = '/auth/login';
-  const resp = await fetch(url, buildPostRequest(JSON.stringify({ email, password })));
-  const result = await parseResponse(resp);
+  const rv = await request.post(url, { email, password });
+  const result = await parseResponse(rv.resp);
   return result;
 }
 
@@ -40,8 +40,8 @@ async function login(email, password) {
  */
 async function register(email, password) {
   const url = '/auth/register';
-  const resp = await fetch(url, buildPostRequest(JSON.stringify({ email, password })));
-  const result = await parseResponse(resp);
+  const rv = await request.post(url, { email, password });
+  const result = await parseResponse(rv.resp);
   return result;
 }
 
