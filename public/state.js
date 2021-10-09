@@ -8,7 +8,6 @@ export function tokens(store) {
   store.on('@init', () => ({
     csrfRefreshToken: '',
     csrfAccessToken: '',
-    accessToken: '',
     currentUser: null,
   }));
   store.on('csrfrefreshtoken/set', (_state, /** @type {string} */ newToken) => ({
@@ -16,9 +15,6 @@ export function tokens(store) {
   }));
   store.on('csrfaccesstoken/set', (_state, /** @type {string} */ newToken) => ({
     csrfAccessToken: newToken,
-  }));
-  store.on('accesstoken/set', (_state, /** @type {string} */ newToken) => ({
-    accessToken: newToken,
   }));
   store.on('user/set', (_state, /** @type {import('..').User} */ user) => ({
     currentUser: user,

@@ -14,7 +14,6 @@ async function parseResponse(resp) {
     const cookies = Cookie();
     result.csrfRefreshToken = cookies.get('csrf_refresh_token');
     result.csrfAccessToken = cookies.get('csrf_access_token');
-    result.accessToken = data.access_token;
     result.user = { ...data.user };
   } else {
     result.error = data.message;

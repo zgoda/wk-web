@@ -9,7 +9,6 @@ export interface AuthResult {
   ok: boolean;
   error?: string;
   user?: User;
-  accessToken?: string;
   csrfAccessToken?: string;
   csrfRefreshToken?: string;
 }
