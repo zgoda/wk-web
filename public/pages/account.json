@@ -1,0 +1,21 @@
+{
+  "title": "Konto użytkownika",
+  "subtitle": "Tutaj możesz zmienić swoje dane",
+  "form": {
+    "name": {
+      "label": "Wyświetlana nazwa użytkownika"
+    },
+    "email": {
+      "label": "Email",
+      "description": "Adres email jest używany jako identyfikator użytkownika i nie może być zmieniony."
+    },
+    "submit": {
+      "text": "Zapisz"
+    }
+  },
+  "alert": {
+    "success": {
+      "text": "Dane użytkownika zapisane"
+    }
+  }
+}

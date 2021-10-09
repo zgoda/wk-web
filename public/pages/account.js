@@ -4,6 +4,7 @@ import { Alert } from '../components/alert';
 import { useStoreon } from '../utils/state';
 import { updateUser } from '../utils/user';
 import styles from './account.module.css';
+import text from './account.json';
 
 export default function Account() {
   const { dispatch, currentUser, csrfAccessToken } = useStoreon(
@@ -29,17 +30,19 @@ export default function Account() {
 
   return (
     <section>
-      {showSuccess && <Alert style="success" text="Dane użytkownika zapisane" />}
+      {showSuccess && <Alert style="success" text={text.alert.success.text} />}
       <header>
         <hgroup>
-          <h1>Konto użytkownika {currentUser.email}</h1>
-          <h2>Tutaj możesz zmienić swoje dane</h2>
+          <h1>
+            {text.title} {currentUser.email}
+          </h1>
+          <h2>{text.subtitle}</h2>
         </hgroup>
       </header>
       <div class={styles.formBody}>
         <form onSubmit={(e) => handleSubmit(e)}>
           <label>
-            Wyświetlana nazwa użytkownika
+            {text.form.name.label}
             <input
               type="text"
               value={name}
@@ -48,14 +51,11 @@ export default function Account() {
             />
           </label>
           <label>
-            Email
+            {text.form.email.label}
             <input type="text" value={currentUser.email} disabled />
           </label>
-          <small>
-            Adres email jest używany jako identyfikator użytkownika i nie może być
-            zmieniony.
-          </small>
-          <button type="submit">Zapisz</button>
+          <small>{text.form.email.description}</small>
+          <button type="submit">{text.form.submit.text}</button>
         </form>
       </div>
     </section>
