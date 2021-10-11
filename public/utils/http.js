@@ -1,4 +1,4 @@
-import { reauthenticate } from './auth';
+import Cookie from 'cookie-universal';
 
 /**
  * @param {string} body
@@ -18,6 +18,36 @@ function buildPostRequest(body, csrfToken) {
     headers,
     body,
   };
+}
+
+/**
+ * @param {Response} resp
+ * @returns {Promise<import('../..').AuthResult>}
+ */
+async function parseAuthResponse(resp) {
+  /** @type {import('../..').AuthResult} */
+  const result = { status: resp.status, ok: resp.ok };
+  const data = await resp.json();
+  if (resp.ok) {
+    const cookies = Cookie();
+    result.csrfRefreshToken = cookies.get('csrf_refresh_token');
+    result.csrfAccessToken = cookies.get('csrf_access_token');
+    result.user = { ...data.user };
+  } else {
+    result.error = data.message;
+  }
+  return result;
+}
+
+/**
+ * @param {string} csrfRefreshToken
+ * @returns {Promise<import('../..').AuthResult>}
+ */
+async function reauthenticate(csrfRefreshToken) {
+  const url = '/auth/refresh';
+  const resp = await fetch(url, buildPostRequest('', csrfRefreshToken));
+  const result = await parseAuthResponse(resp);
+  return result;
 }
 
 /**
@@ -64,46 +94,56 @@ async function _request(method, url, payload, csrfAccessToken, csrfRefreshToken)
 }
 
 const request = {
-  get: async function (
-    /** @type {RequestInfo} */ url,
-    /** @type {any} */ [payload],
-    /** @type {string} */ [csrfAccessToken],
-    /** @type {string} */ [csrfRefreshToken],
-  ) {
+  /**
+   * @param {RequestInfo} url
+   * @param {any} [payload]
+   * @param {string} [csrfAccessToken]
+   * @param {string} [csrfRefreshToken]
+   * @returns {Promise<import('../..').RequestResult>}
+   */
+  async get(url, payload, csrfAccessToken, csrfRefreshToken) {
     return await _request('GET', url, payload, csrfAccessToken, csrfRefreshToken);
   },
-  post: async function (
-    /** @type {RequestInfo} */ url,
-    /** @type {any} */ [payload],
-    /** @type {string} */ [csrfAccessToken],
-    /** @type {string} */ [csrfRefreshToken],
-  ) {
+  /**
+   * @param {RequestInfo} url
+   * @param {any} [payload]
+   * @param {string} [csrfAccessToken]
+   * @param {string} [csrfRefreshToken]
+   * @returns {Promise<import('../..').RequestResult>}
+   */
+  async post(url, payload, csrfAccessToken, csrfRefreshToken) {
     return await _request('POST', url, payload, csrfAccessToken, csrfRefreshToken);
   },
-  put: async function (
-    /** @type {RequestInfo} */ url,
-    /** @type {any} */ [payload],
-    /** @type {string} */ [csrfAccessToken],
-    /** @type {string} */ [csrfRefreshToken],
-  ) {
+  /**
+   * @param {RequestInfo} url
+   * @param {any} [payload]
+   * @param {string} [csrfAccessToken]
+   * @param {string} [csrfRefreshToken]
+   * @returns {Promise<import('../..').RequestResult>}
+   */
+  async put(url, payload, csrfAccessToken, csrfRefreshToken) {
     return await _request('PUT', url, payload, csrfAccessToken, csrfRefreshToken);
   },
-  patch: async function (
-    /** @type {RequestInfo} */ url,
-    /** @type {any} */ [payload],
-    /** @type {string} */ [csrfAccessToken],
-    /** @type {string} */ [csrfRefreshToken],
-  ) {
+  /**
+   * @param {RequestInfo} url
+   * @param {any} [payload]
+   * @param {string} [csrfAccessToken]
+   * @param {string} [csrfRefreshToken]
+   * @returns {Promise<import('../..').RequestResult>}
+   */
+  async patch(url, payload, csrfAccessToken, csrfRefreshToken) {
     return await _request('PATCH', url, payload, csrfAccessToken, csrfRefreshToken);
   },
-  delete: async function (
-    /** @type {RequestInfo} */ url,
-    /** @type {any} */ [payload],
-    /** @type {string} */ [csrfAccessToken],
-    /** @type {string} */ [csrfRefreshToken],
-  ) {
+  /**
+   * @param {RequestInfo} url
+   * @param {any} [payload]
+   * @param {string} [csrfAccessToken]
+   * @param {string} [csrfRefreshToken]
+   * @returns {Promise<import('../..').RequestResult>}
+   */
+  async delete(url, payload, csrfAccessToken, csrfRefreshToken) {
     return await _request('DELETE', url, payload, csrfAccessToken, csrfRefreshToken);
   },
 };
 
-export { buildPostRequest, request };
+export { buildPostRequest, parseAuthResponse, request };

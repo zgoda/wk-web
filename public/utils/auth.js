@@ -1,25 +1,4 @@
-import Cookie from 'cookie-universal';
-
-import { buildPostRequest, request } from './http';
-
-/**
- * @param {Response} resp
- * @returns {Promise<import('../..').AuthResult>}
- */
-async function parseResponse(resp) {
-  /** @type {import('../..').AuthResult} */
-  const result = { status: resp.status, ok: resp.ok };
-  const data = await resp.json();
-  if (resp.ok) {
-    const cookies = Cookie();
-    result.csrfRefreshToken = cookies.get('csrf_refresh_token');
-    result.csrfAccessToken = cookies.get('csrf_access_token');
-    result.user = { ...data.user };
-  } else {
-    result.error = data.message;
-  }
-  return result;
-}
+import { parseAuthResponse, request } from './http';
 
 /**
  * @param {string} email
@@ -29,7 +8,7 @@ async function parseResponse(resp) {
 async function login(email, password) {
   const url = '/auth/login';
   const rv = await request.post(url, { email, password });
-  const result = await parseResponse(rv.resp);
+  const result = await parseAuthResponse(rv.resp);
   return result;
 }
 
@@ -41,19 +20,8 @@ async function login(email, password) {
 async function register(email, password) {
   const url = '/auth/register';
   const rv = await request.post(url, { email, password });
-  const result = await parseResponse(rv.resp);
+  const result = await parseAuthResponse(rv.resp);
   return result;
 }
 
-/**
- * @param {string} csrfRefreshToken
- * @returns {Promise<import('../..').AuthResult>}
- */
-async function reauthenticate(csrfRefreshToken) {
-  const url = '/auth/refresh';
-  const resp = await fetch(url, buildPostRequest('', csrfRefreshToken));
-  const result = await parseResponse(resp);
-  return result;
-}
-
-export { login, register, reauthenticate };
+export { login, register };
