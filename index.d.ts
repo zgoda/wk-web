@@ -25,3 +25,15 @@ export interface RequestResult {
   csrfAccessToken?: string;
   csrfRefreshToken?: string;
 }
+
+export interface Event {
+  user: User;
+  created: number;
+  name: string;
+  date: number;
+  length: number;
+  location: string;
+  virtual: boolean;
+  public: boolean;
+  description?: string;
+}
