@@ -4,6 +4,17 @@ import { fetchEvents } from '../utils/api';
 import { EventsTable } from '../components/presentation';
 import text from './events.json';
 import styles from './events.module.css';
+import { useStoreon } from '../utils/state';
+
+function CreateButton() {
+  const { currentUser } = useStoreon('currentUser');
+
+  if (currentUser != null) {
+    return <button class={styles.createButton}>{text.createButton.text}</button>;
+  }
+
+  return <p class={styles.loginReminder}>Zaloguj się aby dodać wymarsz.</p>;
+}
 
 export default function Events() {
   const [events, setEvents] = useState([]);
@@ -31,7 +42,7 @@ export default function Events() {
           ))}
         </div>
         <div class={styles.buttonWrapper}>
-          <button class={styles.createButton}>{text.createButton.text}</button>
+          <CreateButton />
         </div>
       </div>
       <EventsTable items={events} />

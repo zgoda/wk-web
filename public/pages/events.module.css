@@ -5,3 +5,8 @@
 .buttonWrapper {
   margin: 0 auto;
 }
+
+p.loginReminder {
+  font-weight: bold;
+  color: crimson;
+}
