@@ -25,6 +25,7 @@ const Login = lazy(() => import('./pages/login.js'));
 const Logout = lazy(() => import('./pages/logout.js'));
 const Account = lazy(() => import('./pages/account.js'));
 const Events = lazy(() => import('./pages/events.js'));
+const CreateEvent = lazy(() => import('./pages/createevent.js'));
 
 export function App() {
   return (
@@ -39,6 +40,7 @@ export function App() {
               <Route path="/logout" component={Logout} />
               <Route path="/account" component={Account} />
               <Route path="/events" component={Events} />
+              <Route path="/createevent" component={CreateEvent} />
               <Route default component={NotFound} />
             </Router>
           </ErrorBoundary>

@@ -6,13 +6,16 @@ import text from './events.json';
 import styles from './events.module.css';
 import { useStoreon } from '../utils/state';
 
-function CreateButton() {
+function CreateLink() {
   const { currentUser } = useStoreon('currentUser');
 
   if (currentUser != null) {
-    return <button class={styles.createButton}>{text.createButton.text}</button>;
+    return (
+      <p>
+        <a href="/createevent">{text.createButton.text}</a>
+      </p>
+    );
   }
-
   return <p class={styles.loginReminder}>Zaloguj się aby dodać wymarsz.</p>;
 }
 
@@ -42,7 +45,7 @@ export default function Events() {
           ))}
         </div>
         <div class={styles.buttonWrapper}>
-          <CreateButton />
+          <CreateLink />
         </div>
       </div>
       <EventsTable items={events} />
