@@ -3,7 +3,6 @@ import { useEffect, useState } from 'preact/hooks';
 import { Alert } from '../components/alert';
 import { useStoreon } from '../utils/state';
 import { updateUser } from '../utils/user';
-import styles from './account.module.css';
 import text from './account.json';
 
 export default function Account() {
@@ -46,7 +45,7 @@ export default function Account() {
           <h2>{text.subtitle}</h2>
         </hgroup>
       </header>
-      <div class={styles.formBody}>
+      <div class="formBody">
         <form onSubmit={(e) => handleSubmit(e)}>
           <label>
             {text.form.name.label}
