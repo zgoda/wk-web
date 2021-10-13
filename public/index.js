@@ -1,3 +1,5 @@
+// @ts-ignore
+import 'preact/debug';
 import {
   LocationProvider,
   Router,

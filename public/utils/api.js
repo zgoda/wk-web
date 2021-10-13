@@ -12,4 +12,17 @@ async function fetchEvents() {
   return data.events;
 }
 
-export { fetchEvents };
+/**
+ * @param {import('../..').Event} event
+ * @param {string} csrfAccessToken
+ * @param {string} csrfRefreshToken
+ * @returns {Promise<import('../..').RequestResult>}
+ */
+async function createEvent(event, csrfAccessToken, csrfRefreshToken) {
+  // eslint-disable-next-line no-unused-vars
+  const url = ENDPOINTS.get('event.collection');
+  const result = await request.post(url, event, csrfAccessToken, csrfRefreshToken);
+  return result;
+}
+
+export { fetchEvents, createEvent };

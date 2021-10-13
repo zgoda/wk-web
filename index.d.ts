@@ -27,8 +27,8 @@ export interface RequestResult {
 }
 
 export interface Event {
-  user: User;
-  created: number;
+  user?: User;
+  created?: number;
   name: string;
   date: number;
   length: number;
