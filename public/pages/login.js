@@ -74,7 +74,7 @@ export default function Login() {
       }
       const flash = {
         style: 'success',
-        text: 'Użytkownik pomyślnie zalogowany',
+        text: text.message.success,
       };
       addNotification(flash);
       loc.route('/');
@@ -82,7 +82,7 @@ export default function Login() {
       console.error('(%d) %s', res.status, res.error);
       const flash = {
         style: 'error',
-        text: res.error || 'Logowanie nieudane',
+        text: res.error || text.message.failure,
       };
       addNotification(flash);
     }

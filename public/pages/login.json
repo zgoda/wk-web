@@ -16,5 +16,9 @@
     "password": {
       "label": "Hasło"
     }
+  },
+  "message": {
+    "success": "Użytkownik pomyślnie zalogowany do serwisu",
+    "failure": "Próba zalogowania nieudana"
   }
 }
