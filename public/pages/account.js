@@ -6,15 +6,14 @@ import { updateUser } from '../utils/user';
 import text from './account.json';
 
 export default function Account() {
-  const { dispatch, currentUser, csrfAccessToken, csrfRefreshToken } = useStoreon(
-    'currentUser',
-    'csrfAccessToken',
-    'csrfRefreshToken',
-  );
+  const { dispatch, currentUser, csrfAccessToken, csrfRefreshToken, flashMessages } =
+    useStoreon('currentUser', 'csrfAccessToken', 'csrfRefreshToken', 'flashMessages');
   const [name, setName] = useState('');
-  const [showSuccess, setShowSuccess] = useState(false);
+  const [showFlash, setShowFlash] = useState(false);
 
   useEffect(() => setName(currentUser.name), [currentUser]);
+
+  useEffect(() => setShowFlash(flashMessages.length > 0), [flashMessages]);
 
   const handleSubmit = async (
     /** @type {import("preact").JSX.TargetedEvent<HTMLFormElement, Event>} */ e,
@@ -30,13 +29,17 @@ export default function Account() {
       if (rv.csrfRefreshToken != null) {
         dispatch('csrfrefreshtoken/set', rv.csrfRefreshToken);
       }
-      setShowSuccess(true);
+      const message = {
+        style: 'success',
+        text: text.alert.success.text,
+      };
+      dispatch('flash/add', message);
     }
   };
 
   return (
     <section>
-      {showSuccess && <Alert style="success" text={text.alert.success.text} />}
+      {showFlash && <Alert style="success" text={text.alert.success.text} />}
       <header>
         <hgroup>
           <h1>

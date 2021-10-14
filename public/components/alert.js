@@ -1,11 +1,11 @@
 import { useState } from 'preact/hooks';
 
 /**
- * @typedef {Object} Props
+ * @typedef {Object} AlertProps
  * @property {string} style
  * @property {string} text
  *
- * @param {Props} props
+ * @param {AlertProps} props
  * @returns
  */
 function Alert({ style, text }) {
@@ -24,4 +24,16 @@ function Alert({ style, text }) {
   return null;
 }
 
-export { Alert };
+/**
+ * @typedef {Object} FlashMessagesProps
+ * @property {ReadonlyArray<import('../..').FlashMessage>} messages
+ *
+ * @param {FlashMessagesProps} props
+ */
+function FlashMessages({ messages }) {
+  if (messages.length === 0) {
+    return null;
+  }
+}
+
+export { Alert, FlashMessages };

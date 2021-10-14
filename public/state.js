@@ -8,7 +8,6 @@ export function tokens(store) {
   store.on('@init', () => ({
     csrfRefreshToken: '',
     csrfAccessToken: '',
-    currentUser: null,
   }));
   store.on('csrfrefreshtoken/set', (_state, /** @type {string} */ newToken) => ({
     csrfRefreshToken: newToken,
@@ -16,12 +15,35 @@ export function tokens(store) {
   store.on('csrfaccesstoken/set', (_state, /** @type {string} */ newToken) => ({
     csrfAccessToken: newToken,
   }));
+}
+
+/**
+ * @param {import('storeon').StoreonStore} store
+ */
+export function session(store) {
+  store.on('@init', () => ({
+    currentUser: null,
+    flashMessages: [],
+  }));
   store.on('user/set', (_state, /** @type {import('..').User} */ user) => ({
     currentUser: user,
+  }));
+  store.on('user/clear', (_state) => ({
+    currentUser: null,
+  }));
+  store.on(
+    'flash/add',
+    ({ flashMessages }, /** @type {import('..').FlashMessage} */ flash) => ({
+      flashMessages: flashMessages.concat([flash]),
+    }),
+  );
+  store.on('flash/clear', (_state) => ({
+    flashMessages: [],
   }));
 }
 
 export const store = createStoreon([
   tokens,
+  session,
   process.env.NODE_ENV !== 'production' && storeonDevtools,
 ]);

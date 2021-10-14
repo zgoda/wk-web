@@ -1,3 +1,8 @@
+export interface FlashMessage {
+  style: string;
+  text: string;
+}
+
 export interface User {
   name: string;
   email: string;
