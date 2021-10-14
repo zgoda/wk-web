@@ -1,19 +1,18 @@
 import { useEffect, useState } from 'preact/hooks';
 
-import { Alert } from '../components/alert';
 import { useStoreon } from '../utils/state';
 import { updateUser } from '../utils/user';
 import text from './account.json';
 
 export default function Account() {
-  const { dispatch, currentUser, csrfAccessToken, csrfRefreshToken, flashMessages } =
-    useStoreon('currentUser', 'csrfAccessToken', 'csrfRefreshToken', 'flashMessages');
+  const { dispatch, currentUser, csrfAccessToken, csrfRefreshToken } = useStoreon(
+    'currentUser',
+    'csrfAccessToken',
+    'csrfRefreshToken',
+  );
   const [name, setName] = useState('');
-  const [showFlash, setShowFlash] = useState(false);
 
   useEffect(() => setName(currentUser.name), [currentUser]);
-
-  useEffect(() => setShowFlash(flashMessages.length > 0), [flashMessages]);
 
   const handleSubmit = async (
     /** @type {import("preact").JSX.TargetedEvent<HTMLFormElement, Event>} */ e,
@@ -39,7 +38,6 @@ export default function Account() {
 
   return (
     <section>
-      {showFlash && <Alert style="success" text={text.alert.success.text} />}
       <header>
         <hgroup>
           <h1>

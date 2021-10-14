@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'preact/hooks';
+import { useState } from 'preact/hooks';
 import { useStoreon } from '../utils/state';
 
 /**
@@ -26,11 +26,7 @@ function Alert({ style, text }) {
 }
 
 function FlashMessages() {
-  const { dispatch, flashMessages } = useStoreon('session');
-
-  useEffect(() => {
-    return () => dispatch('flash/clear');
-  }, [dispatch]);
+  const { flashMessages } = useStoreon('flashMessages');
 
   return (
     <>

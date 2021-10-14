@@ -1,7 +1,6 @@
 import { useCallback, useState } from 'preact/hooks';
 import { useLocation } from 'preact-iso';
 
-import { Alert } from '../components/alert';
 import { login, register } from '../utils/auth';
 import { useStoreon } from '../utils/state';
 import text from './login.json';
@@ -39,8 +38,6 @@ export default function Login() {
   const [loginPassword, setLoginPassword] = useState('');
   const [registerEmail, setRegisterEmail] = useState('');
   const [registerPassword, setRegisterPassword] = useState('');
-  const [errorVisible, setErrorVisible] = useState(false);
-  const [errorText, setErrorText] = useState('');
 
   const loc = useLocation();
 
@@ -72,17 +69,24 @@ export default function Login() {
       if (res.user != null) {
         dispatch('user/set', res.user);
       }
+      const flash = {
+        style: 'success',
+        text: 'Użytkownik pomyślnie zalogowany',
+      };
+      dispatch('flash/add', flash);
       loc.route('/');
     } else {
       console.error('(%d) %s', res.status, res.error);
-      setErrorVisible(true);
-      setErrorText(res.error);
+      const flash = {
+        style: 'error',
+        text: res.error || 'Logowanie nieudane',
+      };
+      dispatch('flash/add', flash);
     }
   };
 
   return (
     <section>
-      {errorVisible && <Alert style="error" text={errorText} />}
       <article class="grid">
         <div>
           <hgroup>

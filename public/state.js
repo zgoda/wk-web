@@ -34,7 +34,7 @@ export function session(store) {
   store.on(
     'flash/add',
     ({ flashMessages }, /** @type {import('..').FlashMessage} */ flash) => ({
-      flashMessages: flashMessages.concat([flash]),
+      flashMessages: [flash, ...flashMessages],
     }),
   );
   store.on('flash/clear', (_state) => ({
