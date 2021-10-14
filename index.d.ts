@@ -1,4 +1,5 @@
-export interface FlashMessage {
+export interface Notification {
+  id?: string;
   style: string;
   text: string;
 }

@@ -1,45 +1,20 @@
-import { useState } from 'preact/hooks';
-import { useStoreon } from '../utils/state';
+import { useNotifications } from '../utils/notifications';
 
-/**
- * @typedef {Object} AlertProps
- * @property {string} style
- * @property {string} text
- *
- * @param {AlertProps} props
- * @returns
- */
-function Alert({ style, text }) {
-  const [visible, setVisible] = useState(true);
-
-  if (visible) {
-    return (
-      <div class={`alert-${style}`}>
-        <span class="closebtn" onClick={() => setVisible(false)}>
-          &times;
-        </span>
-        {text}
-      </div>
-    );
-  }
-  return null;
-}
-
-function FlashMessages() {
-  const { flashMessages } = useStoreon('flashMessages');
+function Notifications() {
+  const { notifications, removeNotification } = useNotifications();
 
   return (
     <>
-      {flashMessages.map(
-        (
-          /** @type {import('../..').FlashMessage} */ msg,
-          /** @type {number} */ index,
-        ) => (
-          <Alert key={`flash-${index}`} style={msg.style} text={msg.text} />
-        ),
-      )}
+      {notifications.map((item) => (
+        <div class={`alert-${item.style}`} key={`notif-${item.id}`}>
+          <span class="closebtn" onClick={() => removeNotification(item.id)}>
+            &times;
+          </span>
+          {item.text}
+        </div>
+      ))}
     </>
   );
 }
 
-export { Alert, FlashMessages };
+export { Notifications };

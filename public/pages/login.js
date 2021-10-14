@@ -4,6 +4,7 @@ import { useLocation } from 'preact-iso';
 import { login, register } from '../utils/auth';
 import { useStoreon } from '../utils/state';
 import text from './login.json';
+import { useNotifications } from '../utils/notifications';
 
 function FormBody({ email, emailSetter, password, passwordSetter, submitButtonText }) {
   return (
@@ -39,6 +40,8 @@ export default function Login() {
   const [registerEmail, setRegisterEmail] = useState('');
   const [registerPassword, setRegisterPassword] = useState('');
 
+  const { addNotification } = useNotifications();
+
   const loc = useLocation();
 
   const onReceiveToken = useCallback(
@@ -73,7 +76,7 @@ export default function Login() {
         style: 'success',
         text: 'Użytkownik pomyślnie zalogowany',
       };
-      dispatch('flash/add', flash);
+      addNotification(flash);
       loc.route('/');
     } else {
       console.error('(%d) %s', res.status, res.error);
@@ -81,7 +84,7 @@ export default function Login() {
         style: 'error',
         text: res.error || 'Logowanie nieudane',
       };
-      dispatch('flash/add', flash);
+      addNotification(flash);
     }
   };
 

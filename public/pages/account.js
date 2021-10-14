@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'preact/hooks';
+import { useNotifications } from '../utils/notifications';
 
 import { useStoreon } from '../utils/state';
 import { updateUser } from '../utils/user';
@@ -11,6 +12,8 @@ export default function Account() {
     'csrfRefreshToken',
   );
   const [name, setName] = useState('');
+
+  const { addNotification } = useNotifications();
 
   useEffect(() => setName(currentUser.name), [currentUser]);
 
@@ -32,7 +35,7 @@ export default function Account() {
         style: 'success',
         text: text.alert.success.text,
       };
-      dispatch('flash/add', message);
+      addNotification(message);
     }
   };
 

@@ -10,12 +10,13 @@ import {
 } from 'preact-iso';
 
 // components
-import { FlashMessages } from './components/alert';
 import { Header } from './components/header';
 import { Footer } from './components/footer';
 // state utils
 import { store } from './state';
 import { CustomContext } from './utils/state';
+// other contexts
+import { NotificationsProvider } from './utils/notifications';
 // styles
 import '@csstools/normalize.css/normalize.css';
 import './style.scss';
@@ -33,22 +34,23 @@ export function App() {
   return (
     <LocationProvider>
       <CustomContext.Provider value={store}>
-        <Header />
-        <main class="container">
-          <FlashMessages />
-          <ErrorBoundary>
-            <Router>
-              <Home path="/" />
-              <Route path="/login" component={Login} />
-              <Route path="/logout" component={Logout} />
-              <Route path="/account" component={Account} />
-              <Route path="/events" component={Events} />
-              <Route path="/createevent" component={CreateEvent} />
-              <Route default component={NotFound} />
-            </Router>
-          </ErrorBoundary>
-        </main>
-        <Footer />
+        <NotificationsProvider>
+          <Header />
+          <main class="container">
+            <ErrorBoundary>
+              <Router>
+                <Home path="/" />
+                <Route path="/login" component={Login} />
+                <Route path="/logout" component={Logout} />
+                <Route path="/account" component={Account} />
+                <Route path="/events" component={Events} />
+                <Route path="/createevent" component={CreateEvent} />
+                <Route default component={NotFound} />
+              </Router>
+            </ErrorBoundary>
+          </main>
+          <Footer />
+        </NotificationsProvider>
       </CustomContext.Provider>
     </LocationProvider>
   );

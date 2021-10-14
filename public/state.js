@@ -31,15 +31,6 @@ export function session(store) {
   store.on('user/clear', (_state) => ({
     currentUser: null,
   }));
-  store.on(
-    'flash/add',
-    ({ flashMessages }, /** @type {import('..').FlashMessage} */ flash) => ({
-      flashMessages: [flash, ...flashMessages],
-    }),
-  );
-  store.on('flash/clear', (_state) => ({
-    flashMessages: [],
-  }));
 }
 
 export const store = createStoreon([
