@@ -1,4 +1,5 @@
-import { useState } from 'preact/hooks';
+import { useEffect, useState } from 'preact/hooks';
+import { useStoreon } from '../utils/state';
 
 /**
  * @typedef {Object} AlertProps
@@ -24,16 +25,25 @@ function Alert({ style, text }) {
   return null;
 }
 
-/**
- * @typedef {Object} FlashMessagesProps
- * @property {ReadonlyArray<import('../..').FlashMessage>} messages
- *
- * @param {FlashMessagesProps} props
- */
-function FlashMessages({ messages }) {
-  if (messages.length === 0) {
-    return null;
-  }
+function FlashMessages() {
+  const { dispatch, flashMessages } = useStoreon('session');
+
+  useEffect(() => {
+    return () => dispatch('flash/clear');
+  }, [dispatch]);
+
+  return (
+    <>
+      {flashMessages.map(
+        (
+          /** @type {import('../..').FlashMessage} */ msg,
+          /** @type {number} */ index,
+        ) => (
+          <Alert key={`flash-${index}`} style={msg.style} text={msg.text} />
+        ),
+      )}
+    </>
+  );
 }
 
 export { Alert, FlashMessages };

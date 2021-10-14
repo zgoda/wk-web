@@ -1,4 +1,3 @@
-// @ts-ignore
 import 'preact/debug';
 import {
   LocationProvider,
@@ -11,6 +10,7 @@ import {
 } from 'preact-iso';
 
 // components
+import { FlashMessages } from './components/alert';
 import { Header } from './components/header';
 import { Footer } from './components/footer';
 // state utils
@@ -35,6 +35,7 @@ export function App() {
       <CustomContext.Provider value={store}>
         <Header />
         <main class="container">
+          <FlashMessages />
           <ErrorBoundary>
             <Router>
               <Home path="/" />
