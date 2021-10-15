@@ -1,8 +1,9 @@
-import { nanoid } from 'nanoid';
+import { nanoid } from 'nanoid/non-secure';
 import { createContext } from 'preact';
 import { useCallback, useContext, useState } from 'preact/hooks';
 
 const notificationDefaults = {
+  /** @type {Array<import('../..').Notification>} */
   notifications: [],
   // eslint-disable-next-line no-unused-vars
   addNotification: (/** @type {import('../..').Notification} */ notification) => null,
