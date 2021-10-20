@@ -23,6 +23,9 @@
     "**/*"
   ],
   "typeAcquisition": {
-    "enable": true
+    "enable": true,
+    "exclude": [
+      "source-map",
+    ]  
   }
 }
