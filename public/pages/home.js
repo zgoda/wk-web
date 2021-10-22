@@ -35,7 +35,7 @@ export default function Home() {
           <li>...i za jakiś czas powtórka</li>
         </ul>
         <p>
-          Prawda że prościej się nie da? No to <strong>przejdźmy się</strong>!
+          Prawda że prościej się nie da? No to <strong>przejdźmy się</strong>!
         </p>
       </section>
     </>
