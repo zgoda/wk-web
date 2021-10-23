@@ -14,16 +14,18 @@ function EventsTable({ items }) {
   return (
     <table role="grid">
       <thead>
-        <th scope="col">Nazwa</th>
-        <th scope="col">Data</th>
-        <th scope="col">Długość</th>
-        <th scope="col">Lokalizacja</th>
+        <tr>
+          <th scope="col">Nazwa</th>
+          <th scope="col">Data</th>
+          <th scope="col">Długość</th>
+          <th scope="col">Lokalizacja</th>
+        </tr>
       </thead>
       <tbody>
         {items.map((ev) => (
           <tr key={`ev-${ev.created}-${ev.date}`}>
             <td>{ev.name}</td>
-            <td>{ev.date}</td>
+            <td>{ev.date.toLocaleString()}</td>
             <td>{ev.length}</td>
             <td>{ev.location}</td>
           </tr>

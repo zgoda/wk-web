@@ -8,7 +8,13 @@ const ENDPOINTS = new Map([['event.collection', '/api/events']]);
 async function fetchEvents() {
   const url = ENDPOINTS.get('event.collection');
   const result = await request.get(url);
-  const data = await result.resp.json();
+  const text = await result.resp.text();
+  const data = JSON.parse(text, (key, value) => {
+    if (key === 'date') {
+      return new Date(parseInt(value.toString(), 10));
+    }
+    return value;
+  });
   return data.events;
 }
 
