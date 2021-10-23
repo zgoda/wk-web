@@ -1,6 +1,6 @@
 /**
  * @typedef {Object} EventsTableProps
- * @property {Array.<import("../..").Event>} items
+ * @property {Array.<import("../..").EventData>} items
  */
 
 /**
@@ -25,7 +25,7 @@ function EventsTable({ items }) {
         {items.map((ev) => (
           <tr key={`ev-${ev.created}-${ev.date}`}>
             <td>{ev.name}</td>
-            <td>{ev.date.toLocaleString()}</td>
+            <td>{ev.date.toLocaleDateString()}</td>
             <td>{ev.length}</td>
             <td>{ev.location}</td>
           </tr>

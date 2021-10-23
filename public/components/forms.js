@@ -1,6 +1,9 @@
 import { useState } from 'preact/hooks';
+import { useLocation } from 'preact-iso';
+
 import { createEvent } from '../utils/api';
 import { useStoreon } from '../utils/state';
+import { useNotifications } from '../utils/notifications';
 
 function EventForm() {
   const [name, setName] = useState('');
@@ -10,6 +13,10 @@ function EventForm() {
   const [isVirtual, setIsVirtual] = useState(false);
   const [isPublic, setIsPublic] = useState(true);
   const [description, setDescription] = useState('');
+
+  const { addNotification } = useNotifications();
+
+  const loc = useLocation();
 
   const { csrfAccessToken, csrfRefreshToken } = useStoreon(
     'csrfAccessToken',
@@ -34,7 +41,15 @@ function EventForm() {
       virtual: isVirtual,
       public: isPublic,
     };
-    await createEvent(event, csrfAccessToken, csrfRefreshToken);
+    const rv = await createEvent(event, csrfAccessToken, csrfRefreshToken);
+    if (rv.resp.ok) {
+      const flash = {
+        style: 'success',
+        text: 'Wymarsz został utworzony',
+      };
+      addNotification(flash);
+      loc.route('/events');
+    }
   };
 
   return (

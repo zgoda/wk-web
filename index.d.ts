@@ -43,3 +43,15 @@ export interface Event {
   public: boolean;
   description?: string;
 }
+
+export interface EventData {
+  user?: User;
+  created?: Date;
+  name: string;
+  date: Date;
+  length: number;
+  location: string;
+  virtual: boolean;
+  public: boolean;
+  description?: string;
+}
