@@ -1,0 +1,14 @@
+{
+  "events": {
+    "table": {
+      "header": {
+        "columns": {
+          "name": "Nazwa",
+          "date": "Data",
+          "length": "Długość (km)",
+          "location": "Lokalizacja"
+        }
+      }
+    }
+  }
+}

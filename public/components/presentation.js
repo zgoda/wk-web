@@ -1,3 +1,5 @@
+import text from './presentation.json';
+
 /**
  * @typedef {Object} EventsTableProps
  * @property {Array.<import("../..").EventData>} items
@@ -15,15 +17,15 @@ function EventsTable({ items }) {
     <table role="grid">
       <thead>
         <tr>
-          <th scope="col">Nazwa</th>
-          <th scope="col">Data</th>
-          <th scope="col">Długość</th>
-          <th scope="col">Lokalizacja</th>
+          <th scope="col">{text.events.table.header.columns.name}</th>
+          <th scope="col">{text.events.table.header.columns.name}</th>
+          <th scope="col">{text.events.table.header.columns.length}</th>
+          <th scope="col">{text.events.table.header.columns.location}</th>
         </tr>
       </thead>
       <tbody>
         {items.map((ev) => (
-          <tr key={`ev-${ev.created}-${ev.date}`}>
+          <tr key={`ev-${ev.created.getTime()}-${ev.date.getTime()}`}>
             <td>{ev.name}</td>
             <td>{ev.date.toLocaleDateString()}</td>
             <td>{ev.length}</td>
