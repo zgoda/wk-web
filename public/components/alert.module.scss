@@ -1,0 +1,35 @@
+.alert {
+  padding: 1rem;
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.alertDanger {
+  @extend .alert;
+  background-color: red;
+}
+
+.alertWarning {
+  @extend .alert;
+  background-color: goldenrod;
+}
+
+.alertSuccess {
+  @extend .alert;
+  background-color: green;
+}
+
+.closebtn {
+  margin-left: 1rem;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 1.5rem;
+  line-height: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
+}

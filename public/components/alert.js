@@ -1,6 +1,8 @@
 import { useEffect } from 'preact/hooks';
 import { useNotifications } from '../utils/notifications';
 
+import style from './alert.module.scss';
+
 function Notification({ notification }) {
   const { removeNotification } = useNotifications();
 
@@ -9,9 +11,22 @@ function Notification({ notification }) {
     return () => clearTimeout(timeout);
   }, [notification, removeNotification]);
 
+  let notificationStyle;
+  switch (notification.style) {
+    case 'danger':
+      notificationStyle = style.alertDanger;
+      break;
+    case 'warning':
+      notificationStyle = style.alertWarning;
+      break;
+    default:
+      notificationStyle = style.alertSuccess;
+      break;
+  }
+
   return (
-    <div class={`alert-${notification.style}`}>
-      <span class="closebtn" onClick={() => removeNotification(notification.id)}>
+    <div class={notificationStyle}>
+      <span class={style.closebtn} onClick={() => removeNotification(notification.id)}>
         &times;
       </span>
       {notification.text}

@@ -50,42 +50,6 @@ $primary-700: #455a64;
   }
 }
 
-.alert {
-  padding: 1rem;
-  color: white;
-  margin-bottom: 1rem;
-}
-
-.alert-danger {
-  @extend .alert;
-  background-color: red;
-}
-
-.alert-warning {
-  @extend .alert;
-  background-color: goldenrod;
-}
-
-.alert-success {
-  @extend .alert;
-  background-color: green;
-}
-
-.closebtn {
-  margin-left: 1rem;
-  color: white;
-  font-weight: bold;
-  float: right;
-  font-size: 1.5rem;
-  line-height: 1rem;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.closebtn:hover {
-  color: black;
-}
-
 .formBody {
   width: 26rem;
   margin: 0 auto;
