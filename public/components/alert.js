@@ -1,17 +1,31 @@
+import { useEffect } from 'preact/hooks';
 import { useNotifications } from '../utils/notifications';
 
+function Notification({ notification }) {
+  const { removeNotification } = useNotifications();
+
+  useEffect(() => {
+    const timeout = setTimeout(() => removeNotification(notification.id), 4000);
+    return () => clearTimeout(timeout);
+  }, [notification, removeNotification]);
+
+  return (
+    <div class={`alert-${notification.style}`}>
+      <span class="closebtn" onClick={() => removeNotification(notification.id)}>
+        &times;
+      </span>
+      {notification.text}
+    </div>
+  );
+}
+
 function Notifications() {
-  const { notifications, removeNotification } = useNotifications();
+  const { notifications } = useNotifications();
 
   return (
     <>
       {notifications.map((item) => (
-        <div class={`alert-${item.style}`} key={`notif-${item.id}`}>
-          <span class="closebtn" onClick={() => removeNotification(item.id)}>
-            &times;
-          </span>
-          {item.text}
-        </div>
+        <Notification notification={item} key={`notif-${item.id}`} />
       ))}
     </>
   );
