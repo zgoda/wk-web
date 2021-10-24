@@ -1,13 +1,15 @@
+import text from './footer.json';
+
 function Footer() {
   return (
     <footer class="container">
-      <small>Copyright: © 2021, Jarek Zgoda</small>
+      <small>{text.copyright.text}</small>
       <hr />
       <div class="grid">
-        <div>Korzystanie z serwisu</div>
-        <div>Deklaracja prywatności</div>
-        <div>Informacje ogólne</div>
-        <div>Dziennik zmian</div>
+        <div>{text.links.usage.text}</div>
+        <div>{text.links.privacy.text}</div>
+        <div>{text.links.misc.text}</div>
+        <div>{text.links.changes.text}</div>
       </div>
     </footer>
   );

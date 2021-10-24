@@ -1,0 +1,19 @@
+{
+  "copyright": {
+    "text": "Copyright: © 2021, Jarek Zgoda"
+  },
+  "links": {
+    "usage": {
+      "text": "Korzystanie z serwisu"
+    },
+    "privacy": {
+      "text": "Deklaracja prywatności"
+    },
+    "misc": {
+      "text": "Informacje ogólne"
+    },
+    "changes": {
+      "text": "Dziennik zmian"
+    }
+  }
+}

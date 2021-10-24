@@ -5,6 +5,8 @@ import { createEvent } from '../utils/api';
 import { useStoreon } from '../utils/state';
 import { useNotifications } from '../utils/notifications';
 
+import text from './forms.json';
+
 function EventForm() {
   const [name, setName] = useState('');
   const [date, setDate] = useState(new Date());
@@ -45,7 +47,7 @@ function EventForm() {
     if (rv.resp.ok) {
       const flash = {
         style: 'success',
-        text: 'Wymarsz został utworzony',
+        text: text.createevent.messages.success,
       };
       addNotification(flash);
       loc.route('/events');
@@ -56,7 +58,7 @@ function EventForm() {
     <div class="formBody">
       <form onSubmit={handleFormSubmit}>
         <label>
-          Nazwa
+          {text.createevent.fields.name}
           <input
             type="text"
             value={name}
@@ -66,7 +68,7 @@ function EventForm() {
           />
         </label>
         <label>
-          Data
+          {text.createevent.fields.date}
           <input
             type="date"
             value={date.toISOString().slice(0, 10)}
@@ -76,7 +78,7 @@ function EventForm() {
           />
         </label>
         <label>
-          Długość trasy
+          {text.createevent.fields.length}
           <input
             type="number"
             min="1"
@@ -88,7 +90,7 @@ function EventForm() {
           />
         </label>
         <label>
-          Lokalizacja
+          {text.createevent.fields.location}
           <input
             type="text"
             value={location}
@@ -100,24 +102,24 @@ function EventForm() {
         <fieldset>
           <label>
             <input type="checkbox" checked={isVirtual} onClick={toggleVirtual} />
-            Wirtualny
+            {text.createevent.fields.virtual}
           </label>
         </fieldset>
         <fieldset>
           <label>
             <input type="checkbox" checked={isPublic} onClick={togglePublic} />
-            Publiczny
+            {text.createevent.fields.public}
           </label>
         </fieldset>
         <label>
-          Opis
+          {text.createevent.fields.description}
           <textarea
             value={description}
             // @ts-ignore
             onInput={(e) => setDescription(e.target.value)}
           />
         </label>
-        <button type="submit">Zapisz</button>
+        <button type="submit">{text.createevent.submit.text}</button>
       </form>
     </div>
   );

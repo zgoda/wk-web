@@ -1,0 +1,19 @@
+{
+  "createevent": {
+    "fields": {
+      "name": "Nazwa",
+      "date": "Data",
+      "length": "Długość trasy",
+      "location": "Lokalizacja",
+      "public": "Publiczny",
+      "virtual": "Wirtualny",
+      "description": "Opis"
+    },
+    "submit": {
+      "text": "Zapisz"
+    },
+    "messages": {
+      "success": "Wymarsz został utworzony"
+    }  
+  }
+}

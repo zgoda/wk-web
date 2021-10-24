@@ -1,0 +1,23 @@
+{
+  "loginLink": {
+    "whenAuthenticated": {
+      "text": "Wyloguj"
+    },
+    "whenAnon": {
+      "text": "Strona logowania"
+    }
+  },
+  "accountElement": {
+    "whenAuthenticated": {
+      "text": "Konto"
+    }
+  },
+  "navbar": {
+    "homeLink": {
+      "ariaLabel": "Początek"
+    },
+    "eventsLink": {
+      "text": "Wydarzenia"
+    }
+  }
+}

@@ -3,6 +3,8 @@ import { Home } from 'preact-feather';
 import { useStoreon } from '../utils/state';
 import { Notifications } from './alert';
 
+import text from './header.json';
+
 /**
  * @typedef {Object} ElementProps
  * @property {boolean} isAuthenticated
@@ -14,9 +16,9 @@ import { Notifications } from './alert';
  */
 function LoginLink({ isAuthenticated }) {
   if (isAuthenticated) {
-    return <a href="/logout">Wyloguj</a>;
+    return <a href="/logout">{text.loginLink.whenAuthenticated.text}</a>;
   }
-  return <a href="/login">Strona logowania</a>;
+  return <a href="/login">{text.loginLink.whenAnon.text}</a>;
 }
 
 /**
@@ -27,7 +29,7 @@ function AccountElement({ isAuthenticated }) {
   if (isAuthenticated) {
     return (
       <li>
-        <a href="/account">Konto</a>
+        <a href="/account">{text.accountElement.whenAuthenticated.text}</a>
       </li>
     );
   }
@@ -43,14 +45,14 @@ export function Header() {
       <nav class="container">
         <ul>
           <li>
-            <a href="/" aria-label="Początek">
+            <a href="/" aria-label={text.navbar.homeLink.ariaLabel}>
               <strong>
                 <Home size={32} />
               </strong>
             </a>
           </li>
           <li>
-            <a href="/events">Wydarzenia</a>
+            <a href="/events">{text.navbar.eventsLink.text}</a>
           </li>
         </ul>
         <ul>
