@@ -1,40 +1,38 @@
-import { createStoreon } from 'storeon';
-import { storeonDevtools } from 'storeon/devtools';
+import { action, map } from 'nanostores';
 
-/**
- * @param {import('storeon').StoreonStore} store
- */
-export function tokens(store) {
-  store.on('@init', () => ({
-    csrfRefreshToken: '',
-    csrfAccessToken: '',
-  }));
-  store.on('csrfrefreshtoken/set', (_state, /** @type {string} */ newToken) => ({
-    csrfRefreshToken: newToken,
-  }));
-  store.on('csrfaccesstoken/set', (_state, /** @type {string} */ newToken) => ({
-    csrfAccessToken: newToken,
-  }));
-}
+export const tokenStore = map({
+  csrfRefreshToken: '',
+  csrfAccessToken: '',
+});
 
-/**
- * @param {import('storeon').StoreonStore} store
- */
-export function session(store) {
-  store.on('@init', () => ({
-    currentUser: null,
-    flashMessages: [],
-  }));
-  store.on('user/set', (_state, /** @type {import('..').User} */ user) => ({
-    currentUser: user,
-  }));
-  store.on('user/clear', (_state) => ({
-    currentUser: null,
-  }));
-}
+export const setAccessToken = action(
+  tokenStore,
+  'setAccessToken',
+  (store, /** @type {string} */ token) => {
+    store.setKey('csrfAccessToken', token);
+  },
+);
 
-export const store = createStoreon([
-  tokens,
-  session,
-  process.env.NODE_ENV !== 'production' && storeonDevtools,
-]);
+export const setRefreshToken = action(
+  tokenStore,
+  'setRefreshToken',
+  (store, /** @type {string} */ token) => {
+    store.setKey('csrfRefreshToken', token);
+  },
+);
+
+export const sessionStore = map({
+  currentUser: null,
+});
+
+export const setCurrentUser = action(
+  sessionStore,
+  'setCurrentUser',
+  (store, /** @type {import('..').User} */ user) => {
+    store.setKey('currentUser', user);
+  },
+);
+
+export const clearUser = action(sessionStore, 'clearUser', (store, _ignored) => {
+  store.setKey('currentUser', null);
+});

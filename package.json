@@ -8,13 +8,14 @@
   "types": "./index.d.ts",
   "dependencies": {
     "@csstools/normalize.css": "^12.0.0",
-    "@picocss/pico": "^1.4.0",
+    "@nanostores/preact": "^0.1.2",
+    "@picocss/pico": "^1.4.1",
     "cookie-universal": "^2.1.5",
     "nanoid": "^3.1.30",
+    "nanostores": "^0.5.3",
     "preact": "^10.5.15",
     "preact-feather": "^4.2.1",
-    "preact-iso": "^2.3.0",
-    "storeon": "^3.1.4"
+    "preact-iso": "^2.3.0"
   },
   "devDependencies": {
     "eslint": "^7.32.0",

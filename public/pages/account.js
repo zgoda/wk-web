@@ -1,35 +1,41 @@
+import { useStore } from '@nanostores/preact';
 import { useEffect, useState } from 'preact/hooks';
-import { useNotifications } from '../utils/notifications';
 
-import { useStoreon } from '../utils/state';
+import {
+  sessionStore,
+  setAccessToken,
+  setCurrentUser,
+  setRefreshToken,
+  tokenStore,
+} from '../state';
+import { useNotifications } from '../utils/notifications';
 import { updateUser } from '../utils/user';
+
 import text from './account.json';
 
 export default function Account() {
-  const { dispatch, currentUser, csrfAccessToken, csrfRefreshToken } = useStoreon(
-    'currentUser',
-    'csrfAccessToken',
-    'csrfRefreshToken',
-  );
+  const session = useStore(sessionStore);
+  const tokens = useStore(tokenStore);
   const [name, setName] = useState('');
 
   const { addNotification } = useNotifications();
 
-  useEffect(() => setName(currentUser.name), [currentUser]);
+  useEffect(() => setName(session.currentUser.name), [session.currentUser]);
 
   const handleSubmit = async (
     /** @type {import("preact").JSX.TargetedEvent<HTMLFormElement, Event>} */ e,
   ) => {
     e.preventDefault();
-    currentUser.name = name;
-    const rv = await updateUser(currentUser, csrfAccessToken, csrfRefreshToken);
+    const user = { ...session.currentUser };
+    user.name = name;
+    const rv = await updateUser(user, tokens.csrfAccessToken, tokens.csrfRefreshToken);
     if (rv.status) {
-      dispatch('user/set', rv.user);
+      setCurrentUser(rv.user);
       if (rv.csrfAccessToken != null) {
-        dispatch('csrfaccesstoken/set', rv.csrfAccessToken);
+        setAccessToken(rv.csrfAccessToken);
       }
       if (rv.csrfRefreshToken != null) {
-        dispatch('csrfrefreshtoken/set', rv.csrfRefreshToken);
+        setRefreshToken(rv.csrfRefreshToken);
       }
       const message = {
         style: 'success',
@@ -44,7 +50,7 @@ export default function Account() {
       <header>
         <hgroup>
           <h1>
-            {text.title} {currentUser.email}
+            {text.title} {session.currentUser.email}
           </h1>
           <h2>{text.subtitle}</h2>
         </hgroup>
@@ -62,7 +68,7 @@ export default function Account() {
           </label>
           <label>
             {text.form.email.label}
-            <input type="text" value={currentUser.email} disabled />
+            <input type="text" value={session.currentUser.email} disabled />
           </label>
           <small>{text.form.email.description}</small>
           <button type="submit">{text.form.submit.text}</button>

@@ -1,9 +1,10 @@
 import { useState } from 'preact/hooks';
 import { useLocation } from 'preact-iso';
+import { useStore } from '@nanostores/preact';
 
 import { createEvent } from '../utils/api';
-import { useStoreon } from '../utils/state';
 import { useNotifications } from '../utils/notifications';
+import { tokenStore } from '../state';
 
 import text from './forms.json';
 
@@ -20,10 +21,7 @@ function EventForm() {
 
   const loc = useLocation();
 
-  const { csrfAccessToken, csrfRefreshToken } = useStoreon(
-    'csrfAccessToken',
-    'csrfRefreshToken',
-  );
+  const tokens = useStore(tokenStore);
 
   const toggleVirtual = () => setIsVirtual(!isVirtual);
   const togglePublic = () => setIsPublic(!isPublic);
@@ -43,7 +41,11 @@ function EventForm() {
       virtual: isVirtual,
       public: isPublic,
     };
-    const rv = await createEvent(event, csrfAccessToken, csrfRefreshToken);
+    const rv = await createEvent(
+      event,
+      tokens.csrfAccessToken,
+      tokens.csrfRefreshToken,
+    );
     if (rv.resp.ok) {
       const flash = {
         style: 'success',

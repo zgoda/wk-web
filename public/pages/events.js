@@ -2,14 +2,16 @@ import { useState, useEffect } from 'preact/hooks';
 
 import { fetchEvents } from '../utils/api';
 import { EventsTable } from '../components/presentation';
-import text from './events.json';
+import { useStore } from '@nanostores/preact';
+import { sessionStore } from '../state';
+
 import styles from './events.module.css';
-import { useStoreon } from '../utils/state';
+import text from './events.json';
 
 function CreateLink() {
-  const { currentUser } = useStoreon('currentUser');
+  const session = useStore(sessionStore);
 
-  if (currentUser != null) {
+  if (session.currentUser != null) {
     return (
       <p>
         <a href="/createevent">{text.createButton.text}</a>

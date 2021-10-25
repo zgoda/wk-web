@@ -1,12 +1,14 @@
+import { useStore } from '@nanostores/preact';
 import { AuthenticationRequired } from '../components/auth';
 import { EventForm } from '../components/forms';
-import { useStoreon } from '../utils/state';
+import { sessionStore } from '../state';
+
 import text from './createevent.json';
 
 export default function CreateEvent() {
-  const { currentUser } = useStoreon('currentUser');
+  const session = useStore(sessionStore);
 
-  if (currentUser == null) {
+  if (session.currentUser == null) {
     return <AuthenticationRequired />;
   }
 

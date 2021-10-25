@@ -1,6 +1,7 @@
+import { useStore } from '@nanostores/preact';
 import { Home } from 'preact-feather';
 
-import { useStoreon } from '../utils/state';
+import { sessionStore } from '../state';
 import { Notifications } from './alert';
 
 import text from './header.json';
@@ -37,8 +38,8 @@ function AccountElement({ isAuthenticated }) {
 }
 
 export function Header() {
-  const { currentUser } = useStoreon('currentUser');
-  const isAuthenticated = currentUser != null;
+  const session = useStore(sessionStore);
+  const isAuthenticated = session.currentUser != null;
 
   return (
     <>

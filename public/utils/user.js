@@ -1,5 +1,5 @@
+import { setAccessToken, setRefreshToken } from '../state';
 import { request } from './http';
-import { store } from '../state';
 
 /**
  * @param {import('../..').User} user
@@ -24,11 +24,11 @@ async function updateUser(user, csrfAccessToken, csrfRefreshToken) {
   }
   if (updateResult.csrfAccessToken != null) {
     rv.csrfAccessToken = updateResult.csrfAccessToken;
-    store.dispatch('csrfaccesstoken/set', updateResult.csrfAccessToken);
+    setAccessToken(updateResult.csrfAccessToken);
   }
   if (updateResult.csrfRefreshToken != null) {
     rv.csrfRefreshToken = updateResult.csrfRefreshToken;
-    store.dispatch('csrfrefreshtoken/set', updateResult.csrfRefreshToken);
+    setRefreshToken(updateResult.csrfRefreshToken);
   }
   return rv;
 }

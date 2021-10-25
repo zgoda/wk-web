@@ -1,10 +1,11 @@
-import { useCallback, useState } from 'preact/hooks';
+import { useState } from 'preact/hooks';
 import { useLocation } from 'preact-iso';
 
 import { login, register } from '../utils/auth';
-import { useStoreon } from '../utils/state';
-import text from './login.json';
 import { useNotifications } from '../utils/notifications';
+import { setAccessToken, setCurrentUser, setRefreshToken } from '../state';
+
+import text from './login.json';
 
 function FormBody({ email, emailSetter, password, passwordSetter, submitButtonText }) {
   return (
@@ -34,7 +35,6 @@ function FormBody({ email, emailSetter, password, passwordSetter, submitButtonTe
 }
 
 export default function Login() {
-  const { dispatch } = useStoreon('csrfAccessToken');
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
   const [registerEmail, setRegisterEmail] = useState('');
@@ -43,13 +43,6 @@ export default function Login() {
   const { addNotification } = useNotifications();
 
   const loc = useLocation();
-
-  const onReceiveToken = useCallback(
-    (/** @type {string} */ token, /** @type {string} */ tokenType) => {
-      dispatch(`${tokenType}token/set`, token);
-    },
-    [dispatch],
-  );
 
   const formSubmit = async (
     /** @type {import("preact").JSX.TargetedEvent<HTMLFormElement, Event>} */ e,
@@ -64,13 +57,13 @@ export default function Login() {
     }
     if (res.ok) {
       if (res.csrfRefreshToken != null) {
-        onReceiveToken(res.csrfRefreshToken, 'csrfrefresh');
+        setRefreshToken(res.csrfRefreshToken);
       }
       if (res.csrfAccessToken != null) {
-        onReceiveToken(res.csrfAccessToken, 'csrfaccess');
+        setAccessToken(res.csrfAccessToken);
       }
       if (res.user != null) {
-        dispatch('user/set', res.user);
+        setCurrentUser(res.user);
       }
       const flash = {
         style: 'success',

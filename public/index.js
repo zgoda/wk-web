@@ -12,9 +12,6 @@ import {
 // components
 import { Header } from './components/header';
 import { Footer } from './components/footer';
-// state utils
-import { store } from './state';
-import { CustomContext } from './utils/state';
 // other contexts
 import { NotificationsProvider } from './utils/notifications';
 // styles
@@ -33,25 +30,23 @@ const CreateEvent = lazy(() => import('./pages/createevent.js'));
 export function App() {
   return (
     <LocationProvider>
-      <CustomContext.Provider value={store}>
-        <NotificationsProvider>
-          <Header />
-          <main class="container">
-            <ErrorBoundary>
-              <Router>
-                <Home path="/" />
-                <Route path="/login" component={Login} />
-                <Route path="/logout" component={Logout} />
-                <Route path="/account" component={Account} />
-                <Route path="/events" component={Events} />
-                <Route path="/createevent" component={CreateEvent} />
-                <Route default component={NotFound} />
-              </Router>
-            </ErrorBoundary>
-          </main>
-          <Footer />
-        </NotificationsProvider>
-      </CustomContext.Provider>
+      <NotificationsProvider>
+        <Header />
+        <main class="container">
+          <ErrorBoundary>
+            <Router>
+              <Home path="/" />
+              <Route path="/login" component={Login} />
+              <Route path="/logout" component={Logout} />
+              <Route path="/account" component={Account} />
+              <Route path="/events" component={Events} />
+              <Route path="/createevent" component={CreateEvent} />
+              <Route default component={NotFound} />
+            </Router>
+          </ErrorBoundary>
+        </main>
+        <Footer />
+      </NotificationsProvider>
     </LocationProvider>
   );
 }
