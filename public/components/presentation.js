@@ -11,7 +11,7 @@ import text from './presentation.json';
  */
 function EventsTable({ items }) {
   if (items.length === 0) {
-    return <p>Nie ma żadnych nadchodzących wydarzeń.</p>;
+    return <p>{text.noEvents}</p>;
   }
   return (
     <table role="grid">
