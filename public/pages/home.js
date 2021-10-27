@@ -1,3 +1,4 @@
+import { Routes } from '../routes';
 import text from './home.json';
 
 export default function Home() {
@@ -21,10 +22,10 @@ export default function Home() {
         <p>To bardzo proste.</p>
         <ul>
           <li>
-            <a href="/login">logujesz się</a>
+            <a href={Routes.LOGIN}>logujesz się</a>
           </li>
           <li>
-            <a href="/events">wybierasz marsz</a> do którego chcesz dołączyć...
+            <a href={Routes.EVENTS}>wybierasz marsz</a> do którego chcesz dołączyć...
           </li>
           <li>...albo zgłaszasz swój własny</li>
           <li>idziesz tempem jakie lubisz (to już poza aplikacją!)</li>

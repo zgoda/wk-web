@@ -5,6 +5,7 @@ import { useStore } from '@nanostores/preact';
 import { createEvent } from '../utils/api';
 import { useNotifications } from '../utils/notifications';
 import { tokenStore } from '../state';
+import { Routes } from '../routes';
 
 import text from './forms.json';
 
@@ -52,7 +53,7 @@ function EventForm() {
         text: text.createevent.messages.success,
       };
       addNotification(flash);
-      loc.route('/events');
+      loc.route(Routes.EVENTS);
     }
   };
 

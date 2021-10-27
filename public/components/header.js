@@ -3,6 +3,7 @@ import { Home } from 'preact-feather';
 
 import { sessionStore } from '../state';
 import { Notifications } from './alert';
+import { Routes } from '../routes';
 
 import text from './header.json';
 
@@ -17,9 +18,9 @@ import text from './header.json';
  */
 function LoginLink({ isAuthenticated }) {
   if (isAuthenticated) {
-    return <a href="/logout">{text.loginLink.whenAuthenticated.text}</a>;
+    return <a href={Routes.LOGOUT}>{text.loginLink.whenAuthenticated.text}</a>;
   }
-  return <a href="/login">{text.loginLink.whenAnon.text}</a>;
+  return <a href={Routes.LOGIN}>{text.loginLink.whenAnon.text}</a>;
 }
 
 /**
@@ -30,7 +31,7 @@ function AccountElement({ isAuthenticated }) {
   if (isAuthenticated) {
     return (
       <li>
-        <a href="/account">{text.accountElement.whenAuthenticated.text}</a>
+        <a href={Routes.ACCOUNT}>{text.accountElement.whenAuthenticated.text}</a>
       </li>
     );
   }
@@ -46,14 +47,14 @@ export function Header() {
       <nav class="container">
         <ul>
           <li>
-            <a href="/" aria-label={text.navbar.homeLink.ariaLabel}>
+            <a href={Routes.HOME} aria-label={text.navbar.homeLink.ariaLabel}>
               <strong>
                 <Home size={32} />
               </strong>
             </a>
           </li>
           <li>
-            <a href="/events">{text.navbar.eventsLink.text}</a>
+            <a href={Routes.EVENTS}>{text.navbar.eventsLink.text}</a>
           </li>
         </ul>
         <ul>

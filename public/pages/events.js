@@ -5,6 +5,7 @@ import { EventsTable } from '../components/presentation';
 import { useStore } from '@nanostores/preact';
 import { sessionStore } from '../state';
 
+import { Routes } from '../routes';
 import styles from './events.module.css';
 import text from './events.json';
 
@@ -14,7 +15,7 @@ function CreateLink() {
   if (session.currentUser != null) {
     return (
       <p>
-        <a href="/createevent">{text.createButton.text}</a>
+        <a href={Routes.CREATEEVENT}>{text.createButton.text}</a>
       </p>
     );
   }

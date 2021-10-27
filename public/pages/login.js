@@ -4,6 +4,7 @@ import { useLocation } from 'preact-iso';
 import { login, register } from '../utils/auth';
 import { useNotifications } from '../utils/notifications';
 import { setAccessToken, setCurrentUser, setRefreshToken } from '../state';
+import { Routes } from '../routes';
 
 import text from './login.json';
 
@@ -70,7 +71,7 @@ export default function Login() {
         text: text.message.success,
       };
       addNotification(flash);
-      loc.route('/');
+      loc.route(Routes.HOME);
     } else {
       console.error('(%d) %s', res.status, res.error);
       const flash = {

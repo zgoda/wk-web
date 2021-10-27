@@ -14,6 +14,8 @@ import { Header } from './components/header';
 import { Footer } from './components/footer';
 // other contexts
 import { NotificationsProvider } from './utils/notifications';
+// route definitions
+import { Routes } from './routes';
 // styles
 import '@csstools/normalize.css/normalize.css';
 import './style.scss';
@@ -35,12 +37,12 @@ export function App() {
         <main class="container">
           <ErrorBoundary>
             <Router>
-              <Home path="/" />
-              <Route path="/login" component={Login} />
-              <Route path="/logout" component={Logout} />
-              <Route path="/account" component={Account} />
-              <Route path="/events" component={Events} />
-              <Route path="/createevent" component={CreateEvent} />
+              <Home path={Routes.HOME} />
+              <Route path={Routes.LOGIN} component={Login} />
+              <Route path={Routes.LOGOUT} component={Logout} />
+              <Route path={Routes.ACCOUNT} component={Account} />
+              <Route path={Routes.EVENTS} component={Events} />
+              <Route path={Routes.CREATEEVENT} component={CreateEvent} />
               <Route default component={NotFound} />
             </Router>
           </ErrorBoundary>

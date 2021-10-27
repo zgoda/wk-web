@@ -18,7 +18,7 @@ function EventsTable({ items }) {
       <thead>
         <tr>
           <th scope="col">{text.events.table.header.columns.name}</th>
-          <th scope="col">{text.events.table.header.columns.name}</th>
+          <th scope="col">{text.events.table.header.columns.date}</th>
           <th scope="col">{text.events.table.header.columns.length}</th>
           <th scope="col">{text.events.table.header.columns.location}</th>
         </tr>
