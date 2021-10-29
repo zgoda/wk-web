@@ -27,7 +27,9 @@ export default function Home() {
           <li>
             <a href={Routes.EVENTS}>wybierasz marsz</a> do którego chcesz dołączyć...
           </li>
-          <li>...albo zgłaszasz swój własny</li>
+          <li>
+            ...albo <a href={Routes.CREATEEVENT}>zgłaszasz swój własny</a>
+          </li>
           <li>idziesz tempem jakie lubisz (to już poza aplikacją!)</li>
           <li>
             zdajesz relację (zdjęcia, film, opis słowno-muzyczny, zapis trasy z GPS, co
