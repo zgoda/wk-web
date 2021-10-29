@@ -8,7 +8,7 @@ import {
   setRefreshToken,
   tokenStore,
 } from '../state';
-import { useNotifications } from '../utils/notifications';
+import { NotificationStyle, useNotifications } from '../utils/notifications';
 import { updateUser } from '../utils/user';
 
 import text from './account.json';
@@ -38,7 +38,7 @@ export default function Account() {
         setRefreshToken(rv.csrfRefreshToken);
       }
       const message = {
-        style: 'success',
+        style: NotificationStyle.SUCCESS,
         text: text.alert.success.text,
       };
       addNotification(message);

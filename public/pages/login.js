@@ -2,7 +2,7 @@ import { useState } from 'preact/hooks';
 import { useLocation } from 'preact-iso';
 
 import { login, register } from '../utils/auth';
-import { useNotifications } from '../utils/notifications';
+import { NotificationStyle, useNotifications } from '../utils/notifications';
 import { setAccessToken, setCurrentUser, setRefreshToken } from '../state';
 import { Routes } from '../routes';
 
@@ -67,7 +67,7 @@ export default function Login() {
         setCurrentUser(res.user);
       }
       const flash = {
-        style: 'success',
+        style: NotificationStyle.SUCCESS,
         text: text.message.success,
       };
       addNotification(flash);
@@ -75,7 +75,7 @@ export default function Login() {
     } else {
       console.error('(%d) %s', res.status, res.error);
       const flash = {
-        style: 'error',
+        style: NotificationStyle.ERROR,
         text: res.error || text.message.failure,
       };
       addNotification(flash);

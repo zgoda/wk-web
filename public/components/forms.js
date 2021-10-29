@@ -3,7 +3,7 @@ import { useLocation } from 'preact-iso';
 import { useStore } from '@nanostores/preact';
 
 import { createEvent } from '../utils/api';
-import { useNotifications } from '../utils/notifications';
+import { NotificationStyle, useNotifications } from '../utils/notifications';
 import { tokenStore } from '../state';
 import { Routes } from '../routes';
 
@@ -49,7 +49,7 @@ function EventForm() {
     );
     if (rv.resp.ok) {
       const flash = {
-        style: 'success',
+        style: NotificationStyle.SUCCESS,
         text: text.createevent.messages.success,
       };
       addNotification(flash);

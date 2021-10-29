@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'preact/hooks';
-import { useNotifications } from '../utils/notifications';
+import { NotificationStyle, useNotifications } from '../utils/notifications';
 
 import style from './alert.module.scss';
 
@@ -9,10 +9,10 @@ function Notification({ notification }) {
 
   useEffect(() => {
     switch (notification.style) {
-      case 'danger':
+      case NotificationStyle.ERROR:
         setNotificationStyle(style.alertDanger);
         break;
-      case 'warning':
+      case NotificationStyle.WARNING:
         setNotificationStyle(style.alertWarning);
         break;
       default:

@@ -46,3 +46,9 @@ export function NotificationsProvider({ children }) {
 export function useNotifications() {
   return useContext(NotificationsContext);
 }
+
+export const NotificationStyle = Object.freeze({
+  SUCCESS: 'success',
+  ERROR: 'danger',
+  WARNING: 'warning',
+});
