@@ -22,6 +22,7 @@ export const setRefreshToken = action(
 );
 
 export const sessionStore = map({
+  /** @type {import('..').User} */
   currentUser: null,
 });
 
