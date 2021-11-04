@@ -19,7 +19,7 @@ function CreateLink() {
       </p>
     );
   }
-  return <p class={styles.loginReminder}>Zaloguj się aby dodać wymarsz.</p>;
+  return <p class={styles.loginReminder}>{text.whenAnon.loginToAdd.text}</p>;
 }
 
 export default function Events() {

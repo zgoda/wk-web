@@ -1,8 +1,12 @@
-const NotFound = () => (
-  <section>
-    <h1>404: Not Found</h1>
-    <p>It's gone :(</p>
-  </section>
-);
-
-export default NotFound;
+export default function NotFound() {
+  return (
+    <section>
+      <header>
+        <hgroup>
+          <h1>Nie znaleziono strony o podanym adresie</h1>
+          <h2>Nie mamy tego płaszcza.</h2>
+        </hgroup>
+      </header>
+    </section>
+  );
+}

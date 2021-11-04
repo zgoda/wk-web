@@ -37,11 +37,10 @@ export default function Account() {
       if (rv.csrfRefreshToken != null) {
         setRefreshToken(rv.csrfRefreshToken);
       }
-      const message = {
+      addNotification({
         style: NotificationStyle.SUCCESS,
         text: text.alert.success.text,
-      };
-      addNotification(message);
+      });
     }
   };
 

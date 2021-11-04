@@ -17,12 +17,14 @@ export default function Home() {
       </section>
       <section>
         <header>
-          <h2>Jak to działa?</h2>
+          <h2>{text.sbs.title}</h2>
         </header>
-        <p>To bardzo proste.</p>
+        {text.sbs.intro.map((line, index) => (
+          <p key={`sbs-intro-l-${index}`}>{line}</p>
+        ))}
         <ul>
           <li>
-            <a href={Routes.LOGIN}>logujesz się</a>
+            <a href={Routes.LOGIN}>{text.sbs.youLogIn.text}</a>
           </li>
           <li>
             <a href={Routes.EVENTS}>wybierasz marsz</a> do którego chcesz dołączyć...
@@ -30,12 +32,9 @@ export default function Home() {
           <li>
             ...albo <a href={Routes.CREATEEVENT}>zgłaszasz swój własny</a>
           </li>
-          <li>idziesz tempem jakie lubisz (to już poza aplikacją!)</li>
-          <li>
-            zdajesz relację (zdjęcia, film, opis słowno-muzyczny, zapis trasy z GPS, co
-            chcesz)
-          </li>
-          <li>...i za jakiś czas powtórka</li>
+          <li>{text.sbs.youWalkIt.text}</li>
+          <li>{text.sbs.youReportBack.text}</li>
+          <li>{text.sbs.youRepeat.text}</li>
         </ul>
         <p>
           Prawda że prościej się nie da? No to <strong>przejdźmy się</strong>!
