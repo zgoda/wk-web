@@ -1,7 +1,9 @@
+import { useStore } from '@nanostores/preact';
 import { useLocation } from 'preact-iso';
 import { useEffect } from 'preact/hooks';
 
 import { Routes } from '../routes';
+import { clearUser, tokenStore } from '../state';
 import { logout } from '../utils/auth';
 import { NotificationStyle, useNotifications } from '../utils/notifications';
 import text from './logout.json';
@@ -11,15 +13,27 @@ export default function Logout() {
 
   const loc = useLocation();
 
+  const tokens = useStore(tokenStore);
+
   useEffect(() => {
-    logout();
-    const flash = {
-      style: NotificationStyle.SUCCESS,
-      text: text.subtitle,
-    };
-    addNotification(flash);
+    async function doLogout() {
+      const rv = await logout(tokens.csrfRefreshToken);
+      if (rv.ok) {
+        clearUser();
+        addNotification({
+          style: NotificationStyle.SUCCESS,
+          text: text.subtitle,
+        });
+      } else {
+        addNotification({
+          style: NotificationStyle.ERROR,
+          text: `Nie udało się wylogować użytkownika, błąd: ${rv.error}`,
+        });
+      }
+    }
+    doLogout();
     loc.route(Routes.HOME);
-  }, [addNotification, loc]);
+  }, [addNotification, loc, tokens]);
 
   return (
     <section>

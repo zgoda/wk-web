@@ -89,7 +89,8 @@ async function _request(method, url, payload, csrfAccessToken, csrfRefreshToken)
     options.headers['X-CSRF-TOKEN'] = reauthResult.csrfAccessToken;
     resp = await fetch(url, options);
   }
-  const rv = { resp };
+  /** @type {import('../..').RequestResult} */
+  const rv = { resp, csrfAccessToken, csrfRefreshToken };
   if (resp.ok && resp.status < 400 && didReauth) {
     rv.csrfAccessToken = reauthResult.csrfAccessToken;
     rv.csrfRefreshToken = reauthResult.csrfRefreshToken;

@@ -25,11 +25,12 @@ async function register(email, password) {
 }
 
 /**
+ * @param {string} csrfToken
  * @returns {Promise<import('../..').AuthResult>}
  */
-async function logout() {
+async function logout(csrfToken) {
   const url = '/auth/logout';
-  const rv = await request.post(url);
+  const rv = await request.post(url, null, csrfToken, csrfToken);
   const result = await parseAuthResponse(rv.resp);
   return result;
 }
