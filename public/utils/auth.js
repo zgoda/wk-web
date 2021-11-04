@@ -24,4 +24,14 @@ async function register(email, password) {
   return result;
 }
 
-export { login, register };
+/**
+ * @returns {Promise<import('../..').AuthResult>}
+ */
+async function logout() {
+  const url = '/auth/logout';
+  const rv = await request.post(url);
+  const result = await parseAuthResponse(rv.resp);
+  return result;
+}
+
+export { login, register, logout };

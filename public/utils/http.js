@@ -32,7 +32,11 @@ async function parseAuthResponse(resp) {
     const cookies = Cookie();
     result.csrfRefreshToken = cookies.get('csrf_refresh_token');
     result.csrfAccessToken = cookies.get('csrf_access_token');
-    result.user = { ...data.user };
+    if (data.user != null) {
+      result.user = { ...data.user };
+    } else {
+      result.user = null;
+    }
   } else {
     result.error = data.message;
   }
