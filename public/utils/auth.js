@@ -1,4 +1,4 @@
-import { parseAuthResponse, request } from './http';
+import { logoutReq, parseAuthResponse, request } from './http';
 
 /**
  * @param {string} email
@@ -29,10 +29,8 @@ async function register(email, password) {
  * @returns {Promise<import('../..').AuthResult>}
  */
 async function logout(csrfToken) {
-  const url = '/auth/logout';
-  const rv = await request.post(url, null, csrfToken, csrfToken);
-  const result = await parseAuthResponse(rv.resp);
-  return result;
+  const rv = await logoutReq(csrfToken);
+  return rv;
 }
 
 export { login, register, logout };

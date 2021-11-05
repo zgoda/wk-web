@@ -44,13 +44,34 @@ async function parseAuthResponse(resp) {
 }
 
 /**
+ * @param {string} url
  * @param {string} csrfRefreshToken
  * @returns {Promise<import('../..').AuthResult>}
  */
-async function reauthenticate(csrfRefreshToken) {
-  const url = '/auth/refresh';
-  const resp = await fetch(url, buildPostRequest('', csrfRefreshToken));
+async function _refreshPost(url, csrfRefreshToken, body = null) {
+  const requestBody = body || '';
+  const resp = await fetch(url, buildPostRequest(requestBody, csrfRefreshToken));
   const result = await parseAuthResponse(resp);
+  return result;
+}
+
+/**
+ * @param {string} csrfRefreshToken
+ * @returns {Promise<import('../..').AuthResult>}
+ */
+async function reauthenticateReq(csrfRefreshToken) {
+  const url = '/auth/refresh';
+  const result = await _refreshPost(url, csrfRefreshToken);
+  return result;
+}
+
+/**
+ * @param {string} csrfRefreshToken
+ * @returns {Promise<import('../..').AuthResult>}
+ */
+async function logoutReq(csrfRefreshToken) {
+  const url = '/auth/logout';
+  const result = await _refreshPost(url, csrfRefreshToken);
   return result;
 }
 
@@ -84,7 +105,7 @@ async function _request(method, url, payload, csrfAccessToken, csrfRefreshToken)
   /** @type {import('../..').AuthResult} */
   let reauthResult;
   if (resp.status === 401 && csrfRefreshToken != null) {
-    reauthResult = await reauthenticate(csrfRefreshToken);
+    reauthResult = await reauthenticateReq(csrfRefreshToken);
     didReauth = true;
     options.headers['X-CSRF-TOKEN'] = reauthResult.csrfAccessToken;
     resp = await fetch(url, options);
@@ -151,4 +172,4 @@ const request = {
   },
 };
 
-export { buildPostRequest, parseAuthResponse, request };
+export { buildPostRequest, parseAuthResponse, request, logoutReq };
