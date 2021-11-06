@@ -15,7 +15,9 @@ function CreateLink() {
   if (session.currentUser != null) {
     return (
       <p>
-        <a href={Routes.CREATEEVENT}>{text.createButton.text}</a>
+        <a href={Routes.CREATEEVENT} role="button">
+          {text.createButton.text}
+        </a>
       </p>
     );
   }
