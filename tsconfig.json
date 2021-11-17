@@ -26,7 +26,8 @@
     "enable": true,
     "exclude": [
       "source-map",
-      "agent-base"
+      "agent-base",
+      "https-proxy-agent"
     ]  
   }
 }
