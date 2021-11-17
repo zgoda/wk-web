@@ -26,6 +26,7 @@
     "enable": true,
     "exclude": [
       "source-map",
+      "agent-base"
     ]  
   }
 }

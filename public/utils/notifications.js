@@ -1,4 +1,4 @@
-import { nanoid } from 'nanoid/non-secure';
+import { uid } from 'uid';
 import { createContext } from 'preact';
 import { useCallback, useContext, useState } from 'preact/hooks';
 
@@ -20,7 +20,7 @@ export function NotificationsProvider({ children }) {
 
   const addNotification = useCallback(
     (/** @type {import('../..').Notification} */ notification) => {
-      const nextNotifications = notifications.concat({ id: nanoid(), ...notification });
+      const nextNotifications = notifications.concat({ id: uid(16), ...notification });
       setNotifications(nextNotifications);
     },
     [notifications, setNotifications],
