@@ -10,9 +10,7 @@ import text from './header.json';
 /**
  * @typedef {Object} ElementProps
  * @property {boolean} isAuthenticated
- */
-
-/**
+ *
  * @param {ElementProps} props
  * @returns {JSX.Element}
  */

@@ -1,11 +1,10 @@
+import { Routes } from '../routes';
 import text from './presentation.json';
 
 /**
  * @typedef {Object} EventsTableProps
- * @property {Array.<import("../..").EventData>} items
- */
-
-/**
+ * @property {Array<import("../..").EventData>} items
+ *
  * @param {EventsTableProps} props
  * @returns {JSX.Element}
  */
@@ -26,7 +25,9 @@ function EventsTable({ items }) {
       <tbody>
         {items.map((ev) => (
           <tr key={`ev-${ev.created.getTime()}-${ev.date.getTime()}`}>
-            <td>{ev.name}</td>
+            <td>
+              <a href={`${Routes.EVENT_BARE}/${ev.id}`}>{ev.name}</a>
+            </td>
             <td>{ev.date.toLocaleDateString()}</td>
             <td>{ev.length}</td>
             <td>{ev.location}</td>
