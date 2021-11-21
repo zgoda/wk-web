@@ -1,5 +1,5 @@
 import { useStore } from '@nanostores/preact';
-import { EventStore } from '../state/stores';
+import { appStateStore, EventStore } from '../state/stores';
 
 /**
  * @typedef {Object} EventProps
@@ -11,7 +11,11 @@ import { EventStore } from '../state/stores';
  */
 export default function Event({ params }) {
   const event = useStore(EventStore(params.id.toString()));
+  const { isLoading } = useStore(appStateStore);
 
+  if (isLoading) {
+    return <section>It's loading...</section>;
+  }
   return (
     <section>
       <header>
@@ -20,6 +24,14 @@ export default function Event({ params }) {
           <h2>{event.name}</h2>
         </hgroup>
       </header>
+      <div class="grid">
+        <div>
+          <p>Utworzony</p>
+        </div>
+        <div>
+          <p>{event.created.toLocaleString()}</p>
+        </div>
+      </div>
     </section>
   );
 }

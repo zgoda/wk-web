@@ -1,4 +1,4 @@
-import { map, mapTemplate } from 'nanostores';
+import { map, mapTemplate, task } from 'nanostores';
 import { fetchEvent } from '../utils/api';
 
 export const tokenStore = map({
@@ -11,11 +11,20 @@ export const sessionStore = map({
   currentUser: null,
 });
 
+export const appStateStore = map({
+  isLoading: false,
+});
+
 export const EventStore = mapTemplate(
   (
     /** @type {import('nanostores').MapStore<import('../..').EventData>} */ store,
     id,
   ) => {
-    fetchEvent(id).then((evt) => store.set({ ...evt, id }));
+    task(async () => {
+      appStateStore.set({ isLoading: true });
+      const event = await fetchEvent(id);
+      store.set({ ...event, id });
+      appStateStore.set({ isLoading: false });
+    });
   },
 );
