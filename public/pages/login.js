@@ -3,7 +3,7 @@ import { useLocation } from 'preact-iso';
 
 import { login, register } from '../utils/auth';
 import { NotificationStyle, useNotifications } from '../utils/notifications';
-import { setAccessToken, setCurrentUser, setRefreshToken } from '../state';
+import { setAccessToken, setCurrentUser, setRefreshToken } from '../state/actions';
 import { Routes } from '../routes';
 
 import text from './login.json';

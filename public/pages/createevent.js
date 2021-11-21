@@ -1,7 +1,7 @@
 import { useStore } from '@nanostores/preact';
 import { AuthenticationRequired } from '../components/auth';
 import { EventForm } from '../components/forms';
-import { sessionStore } from '../state';
+import { sessionStore } from '../state/stores';
 
 import text from './createevent.json';
 

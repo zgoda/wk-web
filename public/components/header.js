@@ -1,9 +1,9 @@
 import { useStore } from '@nanostores/preact';
 import { Home } from 'preact-feather';
 
-import { sessionStore } from '../state';
 import { Notifications } from './alert';
 import { Routes } from '../routes';
+import { sessionStore } from '../state/stores';
 
 import text from './header.json';
 

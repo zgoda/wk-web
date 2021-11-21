@@ -3,7 +3,7 @@ import { useState, useEffect } from 'preact/hooks';
 import { fetchEvents } from '../utils/api';
 import { EventsTable } from '../components/presentation';
 import { useStore } from '@nanostores/preact';
-import { sessionStore } from '../state';
+import { sessionStore } from '../state/stores';
 
 import { Routes } from '../routes';
 import styles from './events.module.css';

@@ -3,7 +3,8 @@ import { useLocation } from 'preact-iso';
 import { useEffect } from 'preact/hooks';
 
 import { Routes } from '../routes';
-import { clearUser, tokenStore } from '../state';
+import { clearUser } from '../state/actions';
+import { tokenStore } from '../state/stores';
 import { logout } from '../utils/auth';
 import { NotificationStyle, useNotifications } from '../utils/notifications';
 import text from './logout.json';

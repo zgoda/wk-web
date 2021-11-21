@@ -1,15 +1,12 @@
-import { action, map } from 'nanostores';
-
-export const tokenStore = map({
-  csrfRefreshToken: '',
-  csrfAccessToken: '',
-});
+import { action } from 'nanostores';
+import { sessionStore, tokenStore } from './stores';
 
 export const setAccessToken = action(
   tokenStore,
   'setAccessToken',
   (store, /** @type {string} */ token) => {
     store.setKey('csrfAccessToken', token);
+    return store.get();
   },
 );
 
@@ -18,22 +15,20 @@ export const setRefreshToken = action(
   'setRefreshToken',
   (store, /** @type {string} */ token) => {
     store.setKey('csrfRefreshToken', token);
+    return store.get();
   },
 );
-
-export const sessionStore = map({
-  /** @type {import('..').User} */
-  currentUser: null,
-});
 
 export const setCurrentUser = action(
   sessionStore,
   'setCurrentUser',
-  (store, /** @type {import('..').User} */ user) => {
+  (store, /** @type {import('../..').User} */ user) => {
     store.setKey('currentUser', user);
+    return store.get();
   },
 );
 
-export const clearUser = action(sessionStore, 'clearUser', (store, _ignored) => {
+export const clearUser = action(sessionStore, 'clearUser', (store) => {
   store.setKey('currentUser', null);
+  return store.get();
 });

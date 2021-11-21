@@ -4,7 +4,7 @@ import { useStore } from '@nanostores/preact';
 
 import { createEvent } from '../utils/api';
 import { NotificationStyle, useNotifications } from '../utils/notifications';
-import { tokenStore } from '../state';
+import { tokenStore } from '../state/stores';
 import { Routes } from '../routes';
 
 import text from './forms.json';

@@ -1,13 +1,8 @@
 import { useStore } from '@nanostores/preact';
 import { useEffect, useState } from 'preact/hooks';
 
-import {
-  sessionStore,
-  setAccessToken,
-  setCurrentUser,
-  setRefreshToken,
-  tokenStore,
-} from '../state';
+import { setAccessToken, setCurrentUser, setRefreshToken } from '../state/actions';
+import { sessionStore, tokenStore } from '../state/stores';
 import { NotificationStyle, useNotifications } from '../utils/notifications';
 import { updateUser } from '../utils/user';
 

@@ -1,4 +1,4 @@
-import { setAccessToken, setRefreshToken } from '../state';
+import { setAccessToken, setRefreshToken } from '../state/actions';
 import { request } from './http';
 
 /**
