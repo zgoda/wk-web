@@ -21,10 +21,13 @@ export const EventStore = mapTemplate(
     id,
   ) => {
     task(async () => {
-      appStateStore.set({ isLoading: true });
-      const event = await fetchEvent(id);
-      store.set({ ...event, id });
-      appStateStore.set({ isLoading: false });
+      try {
+        appStateStore.setKey('isLoading', true);
+        const event = await fetchEvent(id);
+        store.set({ ...event, id });
+      } finally {
+        appStateStore.setKey('isLoading', false);
+      }
     });
   },
 );

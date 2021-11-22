@@ -1,5 +1,7 @@
 import { useStore } from '@nanostores/preact';
+
 import { appStateStore, EventStore } from '../state/stores';
+import { Loading } from '../components/loading';
 
 /**
  * @typedef {Object} EventProps
@@ -14,7 +16,7 @@ export default function Event({ params }) {
   const { isLoading } = useStore(appStateStore);
 
   if (isLoading) {
-    return <section>It's loading...</section>;
+    return <Loading />;
   }
   return (
     <section>
