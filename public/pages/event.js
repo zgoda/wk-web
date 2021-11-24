@@ -1,7 +1,7 @@
-import { useStore } from '@nanostores/preact';
+import { useEffect, useState } from 'preact/hooks';
 
-import { appStateStore, EventStore } from '../state/stores';
 import { Loading } from '../components/loading';
+import { fetchEvent } from '../utils/api';
 
 /**
  * @typedef {Object} EventProps
@@ -12,8 +12,21 @@ import { Loading } from '../components/loading';
  * @returns {JSX.Element}
  */
 export default function Event({ params }) {
-  const event = useStore(EventStore(params.id.toString()));
-  const { isLoading } = useStore(appStateStore);
+  /**
+   * @type [import('../..').EventData, import('preact/hooks').StateUpdater<import('../..').EventData>]
+   */
+  const [event, setEvent] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchEventData = async () => {
+      setIsLoading(true);
+      const rv = await fetchEvent(params.id);
+      setEvent(rv);
+      setIsLoading(false);
+    };
+    fetchEventData();
+  }, [params.id]);
 
   if (isLoading) {
     return <Loading />;

@@ -1,5 +1,5 @@
 import { action } from 'nanostores';
-import { appStateStore, sessionStore, tokenStore } from './stores';
+import { sessionStore, tokenStore } from './stores';
 
 export const setAccessToken = action(
   tokenStore,
@@ -32,12 +32,3 @@ export const clearUser = action(sessionStore, 'clearUser', (store) => {
   store.setKey('currentUser', null);
   return store.get();
 });
-
-export const setAppStateLoading = action(
-  appStateStore,
-  'setAppStateLoading',
-  (store, /** @type {boolean} */ value) => {
-    store.setKey('isLoading', value);
-    return store.get();
-  },
-);

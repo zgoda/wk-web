@@ -1,4 +1,4 @@
-import { request } from './http';
+import { dateReviver, request } from './http';
 
 const ENDPOINTS = new Map([
   ['event.collection', '/api/events'],
@@ -12,13 +12,8 @@ async function fetchEvents() {
   const url = ENDPOINTS.get('event.collection');
   const result = await request.get(url);
   const text = await result.resp.text();
-  const data = JSON.parse(text, (key, value) => {
-    if (['date', 'created'].includes(key)) {
-      return new Date(parseInt(value.toString(), 10));
-    }
-    return value;
-  });
-  return data.events;
+  const data = JSON.parse(text, dateReviver);
+  return data.collection;
 }
 
 /**
@@ -34,20 +29,15 @@ async function createEvent(event, csrfAccessToken, csrfRefreshToken) {
 }
 
 /**
- * @param {string} eventId
+ * @param {number} eventId
  * @returns {Promise<import('../..').EventData>}
  */
 async function fetchEvent(eventId) {
   const url = `${ENDPOINTS.get('event.item')}/${eventId}`;
   const result = await request.get(url);
   const text = await result.resp.text();
-  const data = JSON.parse(text, (key, value) => {
-    if (['date', 'created'].includes(key)) {
-      return new Date(parseInt(value.toString(), 10));
-    }
-    return value;
-  });
-  return data.event;
+  const data = JSON.parse(text, dateReviver);
+  return data.item;
 }
 
 export { fetchEvent, fetchEvents, createEvent };
