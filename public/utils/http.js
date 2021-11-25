@@ -1,17 +1,4 @@
 import Cookie from 'cookie-universal';
-import { useEffect, useReducer, useRef } from 'preact/hooks';
-
-/**
- * @param {string} key
- * @param {any} value
- * @returns {any}
- */
-export function dateReviver(key, value) {
-  if (['date', 'created'].includes(key)) {
-    return new Date(parseInt(value.toString(), 10));
-  }
-  return value;
-}
 
 /**
  * @param {string} body
@@ -183,63 +170,6 @@ const request = {
   async delete(url, payload, csrfAccessToken, csrfRefreshToken) {
     return await _request('DELETE', url, payload, csrfAccessToken, csrfRefreshToken);
   },
-};
-
-export const useFetchItem = (/** @type {string} */ url) => {
-  const cache = useRef({});
-
-  const initialState = {
-    status: 'idle',
-    error: null,
-    data: null,
-  };
-
-  const [state, dispatch] = useReducer((state, action) => {
-    switch (action.type) {
-      case 'FETCHING':
-        return { ...initialState, status: 'fetching' };
-      case 'FETCHED':
-        return { ...initialState, status: 'fetched', data: action.payload };
-      case 'FETCH_ERROR':
-        return { ...initialState, status: 'error', error: action.payload };
-      default:
-        return state;
-    }
-  }, initialState);
-
-  useEffect(() => {
-    let cancelRequest = false;
-    if (!url) {
-      return;
-    }
-    const fetchData = async () => {
-      dispatch({ type: 'FETCHING' });
-      let itemData;
-      if (cache.current[url]) {
-        itemData = cache.current[url];
-        dispatch({ type: 'FETCHED', payload: itemData.item });
-      } else {
-        try {
-          const result = await request.get(url);
-          const text = await result.resp.text();
-          itemData = JSON.parse(text, dateReviver);
-          cache.current[url] = itemData;
-          if (cancelRequest) {
-            return;
-          }
-          dispatch({ type: 'FETCHED', payload: itemData.item });
-        } catch (error) {
-          if (cancelRequest) {
-            return;
-          }
-          dispatch({ type: 'FETCH_ERROR', payload: error.message });
-        }
-      }
-    };
-    fetchData();
-    return () => (cancelRequest = true);
-  }, [url]);
-  return state;
 };
 
 export { buildPostRequest, parseAuthResponse, request, logoutReq };

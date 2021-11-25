@@ -1,9 +1,21 @@
-import { dateReviver, request } from './http';
+import { request } from './http';
 
 const ENDPOINTS = new Map([
   ['event.collection', '/api/events'],
   ['event.item', '/api/event'],
 ]);
+
+/**
+ * @param {string} key
+ * @param {any} value
+ * @returns {any}
+ */
+export function dateReviver(key, value) {
+  if (['date', 'created'].includes(key)) {
+    return new Date(parseInt(value.toString(), 10));
+  }
+  return value;
+}
 
 /**
  * @returns {Promise<ReadonlyArray<import('../..').EventData>>}

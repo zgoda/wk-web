@@ -3,6 +3,8 @@ import { useEffect, useState } from 'preact/hooks';
 import { Loading } from '../components/loading';
 import { fetchEvent } from '../utils/api';
 
+import styles from './event.module.css';
+
 /**
  * @typedef {Object} EventProps
  * @property {Object} params
@@ -35,18 +37,47 @@ export default function Event({ params }) {
     <section>
       <header>
         <hgroup>
-          <h1>Szczegóły wymarszu</h1>
-          <h2>{event.name}</h2>
+          <h1>{event.name}</h1>
+          <h2>
+            Odbędzie się {event.date.toLocaleDateString()}
+            {event.virtual && ', wirtualny'}
+            {event.public && ', publiczny'}
+          </h2>
         </hgroup>
       </header>
-      <div class="grid">
-        <div>
+      <div class={styles.row}>
+        <div class={styles.left}>
           <p>Utworzony</p>
         </div>
-        <div>
+        <div class={styles.right}>
           <p>{event.created.toLocaleString()}</p>
         </div>
       </div>
+      <div class={styles.row}>
+        <div class={styles.left}>
+          <p>Autor</p>
+        </div>
+        <div class={styles.right}>
+          <p>{event.user.name}</p>
+        </div>
+      </div>
+      <div class={styles.row}>
+        <div class={styles.left}>
+          <p>Długość</p>
+        </div>
+        <div class={styles.right}>
+          <p>{`${event.length} km`}</p>
+        </div>
+      </div>
+      <div class={styles.row}>
+        <div class={styles.left}>
+          <p>Gdzie</p>
+        </div>
+        <div class={styles.right}>
+          <p>{event.location}</p>
+        </div>
+      </div>
+      {event.description && <p>{event.description}</p>}
     </section>
   );
 }
