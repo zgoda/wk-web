@@ -6,6 +6,27 @@ import { fetchEvent } from '../utils/api';
 import styles from './event.module.css';
 
 /**
+ * @typedef {object} DisplayRowProps
+ * @property {string} label
+ * @property {string} value
+ *
+ * @param {DisplayRowProps} props
+ * @returns {JSX.Element}
+ */
+function DisplayRow({ label, value }) {
+  return (
+    <div class={styles.row}>
+      <div class={styles.left}>
+        <p>{label}</p>
+      </div>
+      <div class={styles.right}>
+        <p>{value}</p>
+      </div>
+    </div>
+  );
+}
+
+/**
  * @typedef {Object} EventProps
  * @property {Object} params
  * @property {number} params.id
@@ -33,6 +54,7 @@ export default function Event({ params }) {
   if (isLoading) {
     return <Loading />;
   }
+
   return (
     <section>
       <header>
@@ -45,38 +67,10 @@ export default function Event({ params }) {
           </h2>
         </hgroup>
       </header>
-      <div class={styles.row}>
-        <div class={styles.left}>
-          <p>Utworzony</p>
-        </div>
-        <div class={styles.right}>
-          <p>{event.created.toLocaleString()}</p>
-        </div>
-      </div>
-      <div class={styles.row}>
-        <div class={styles.left}>
-          <p>Autor</p>
-        </div>
-        <div class={styles.right}>
-          <p>{event.user.name}</p>
-        </div>
-      </div>
-      <div class={styles.row}>
-        <div class={styles.left}>
-          <p>Długość</p>
-        </div>
-        <div class={styles.right}>
-          <p>{`${event.length} km`}</p>
-        </div>
-      </div>
-      <div class={styles.row}>
-        <div class={styles.left}>
-          <p>Gdzie</p>
-        </div>
-        <div class={styles.right}>
-          <p>{event.location}</p>
-        </div>
-      </div>
+      <DisplayRow label="Utworzony" value={event.created.toLocaleString()} />
+      <DisplayRow label="Autor" value={event.user.name} />
+      <DisplayRow label="Długość" value={`${event.length} km`} />
+      <DisplayRow label="Gdzie" value={event.location} />
       {event.description && <p>{event.description}</p>}
     </section>
   );

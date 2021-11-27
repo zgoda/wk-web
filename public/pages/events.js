@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'preact/hooks';
+import { useStore } from '@nanostores/preact';
 
 import { fetchEvents } from '../utils/api';
 import { EventsTable } from '../components/presentation';
-import { useStore } from '@nanostores/preact';
 import { sessionStore } from '../state/stores';
-
+import { Loading } from '../components/loading';
 import { Routes } from '../routes';
 import styles from './events.module.css';
 import text from './events.json';
@@ -26,14 +26,21 @@ function CreateLink() {
 
 export default function Events() {
   const [events, setEvents] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function updateEvents() {
+      setIsLoading(true);
       const events = await fetchEvents();
       setEvents([...events]);
+      setIsLoading(false);
     }
     updateEvents();
   }, []);
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <section>
