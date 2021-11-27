@@ -4,6 +4,7 @@ import { Loading } from '../components/loading';
 import { fetchEvent } from '../utils/api';
 
 import styles from './event.module.css';
+import text from './event.json';
 
 /**
  * @typedef {object} DisplayRowProps
@@ -62,15 +63,15 @@ export default function Event({ params }) {
           <h1>{event.name}</h1>
           <h2>
             Odbędzie się {event.date.toLocaleDateString()}
-            {event.virtual && ', wirtualny'}
-            {event.public && ', publiczny'}
+            {event.virtual && `, ${text.virtual}`}
+            {event.public && `, ${text.public}`}
           </h2>
         </hgroup>
       </header>
-      <DisplayRow label="Utworzony" value={event.created.toLocaleString()} />
-      <DisplayRow label="Autor" value={event.user.name} />
-      <DisplayRow label="Długość" value={`${event.length} km`} />
-      <DisplayRow label="Gdzie" value={event.location} />
+      <DisplayRow label={text.created} value={event.created.toLocaleString()} />
+      <DisplayRow label={text.author} value={event.user.name} />
+      <DisplayRow label={text.length} value={event.length.toString()} />
+      <DisplayRow label={text.location} value={event.location} />
       {event.description && <p>{event.description}</p>}
     </section>
   );
