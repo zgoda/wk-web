@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'preact/hooks';
+import { useStore } from '@nanostores/preact';
 
 import { Loading } from '../components/loading';
 import { fetchEvent } from '../utils/api';
+import { sessionStore } from '../state/stores';
+import { isActiveOwner } from '../utils/user';
+import { Routes } from '../routes';
 
 import styles from './event.module.css';
 import text from './event.json';
@@ -25,6 +29,26 @@ function DisplayRow({ label, value }) {
       </div>
     </div>
   );
+}
+
+/**
+ * @typedef {object} OwnerToolsRowProps
+ * @property {import('../..').EventData} event
+ *
+ * @param {OwnerToolsRowProps} props
+ * @returns {JSX.Element | null}
+ */
+function OwnerToolsRow({ event }) {
+  const session = useStore(sessionStore);
+  if (isActiveOwner(event, session.currentUser))
+    return (
+      <div>
+        <a role="button" href={`${Routes.EDITEVENT_BARE}/${event.id}`}>
+          {text.editButton.text}
+        </a>
+      </div>
+    );
+  return null;
 }
 
 /**
@@ -68,6 +92,7 @@ export default function Event({ params }) {
           </h2>
         </hgroup>
       </header>
+      <OwnerToolsRow event={event} />
       <DisplayRow label={text.created} value={event.created.toLocaleString()} />
       <DisplayRow label={text.author} value={event.user.name} />
       <DisplayRow label={text.length} value={event.length.toString()} />

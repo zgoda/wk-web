@@ -7,7 +7,7 @@ import { request } from './http';
  * @param {string} csrfRefreshToken
  * @returns {Promise<import('../..').UserUpdateResult>}
  */
-async function updateUser(user, csrfAccessToken, csrfRefreshToken) {
+export async function updateUser(user, csrfAccessToken, csrfRefreshToken) {
   const url = `/api/user/${user.email}`;
   const payload = { name: user.name };
   const updateResult = await request.patch(
@@ -33,4 +33,14 @@ async function updateUser(user, csrfAccessToken, csrfRefreshToken) {
   return rv;
 }
 
-export { updateUser };
+/**
+ * @param {import('../..').EventData} event
+ * @param {import('../..').User} user
+ * @returns {boolean}
+ */
+export function isActiveOwner(event, user) {
+  if (user.isActive && event.user != null && user.email === event.user.email) {
+    return true;
+  }
+  return false;
+}

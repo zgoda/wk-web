@@ -5,7 +5,7 @@ import { logoutReq, parseAuthResponse, request } from './http';
  * @param {string} password
  * @returns {Promise<import('../..').AuthResult>}
  */
-async function login(email, password) {
+export async function login(email, password) {
   const url = '/auth/login';
   const rv = await request.post(url, { email, password });
   const result = await parseAuthResponse(rv.resp);
@@ -17,7 +17,7 @@ async function login(email, password) {
  * @param {string} password
  * @returns {Promise<import('../..').AuthResult>}
  */
-async function register(email, password) {
+export async function register(email, password) {
   const url = '/auth/register';
   const rv = await request.post(url, { email, password });
   const result = await parseAuthResponse(rv.resp);
@@ -28,9 +28,7 @@ async function register(email, password) {
  * @param {string} csrfToken
  * @returns {Promise<import('../..').AuthResult>}
  */
-async function logout(csrfToken) {
+export async function logout(csrfToken) {
   const rv = await logoutReq(csrfToken);
   return rv;
 }
-
-export { login, register, logout };

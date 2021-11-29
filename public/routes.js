@@ -7,4 +7,6 @@ export const Routes = Object.freeze({
   CREATEEVENT: '/createevent',
   EVENT: '/event/:id',
   EVENT_BARE: '/event',
+  EDITEVENT: '/editevent/:id',
+  EDITEVENT_BARE: '/editevent',
 });
