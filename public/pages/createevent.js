@@ -1,6 +1,6 @@
 import { useStore } from '@nanostores/preact';
 import { AuthenticationRequired } from '../components/auth';
-import { EventForm } from '../components/forms';
+import { EditMode, EventForm } from '../components/forms';
 import { sessionStore } from '../state/stores';
 
 import text from './createevent.json';
@@ -20,7 +20,7 @@ export default function CreateEvent() {
           <h2>{text.subtitle}</h2>
         </hgroup>
       </header>
-      <EventForm />
+      <EventForm editMode={EditMode.CREATE} />
     </section>
   );
 }

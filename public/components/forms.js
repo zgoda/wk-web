@@ -1,15 +1,33 @@
-import { useState } from 'preact/hooks';
+import { useEffect, useState } from 'preact/hooks';
 import { useLocation } from 'preact-iso';
 import { useStore } from '@nanostores/preact';
 
-import { createEvent } from '../utils/api';
+import { createEvent, updateEvent } from '../utils/api';
 import { NotificationStyle, useNotifications } from '../utils/notifications';
 import { tokenStore } from '../state/stores';
 import { Routes } from '../routes';
 
 import text from './forms.json';
 
-function EventForm() {
+export const EditMode = Object.freeze({
+  EDIT: 'e',
+  CREATE: 'c',
+});
+
+const EDITMODE_MAP = Object.freeze({
+  e: updateEvent,
+  c: createEvent,
+});
+
+/**
+ * @typedef {object} EventFormProps
+ * @property {string} editMode
+ * @property {import('../..').EventData} [event=null]
+ *
+ * @param {EventFormProps} props
+ * @returns {JSX.Element}
+ */
+export function EventForm({ editMode, event }) {
   const [name, setName] = useState('');
   const [date, setDate] = useState(new Date());
   const [length, setLength] = useState(20);
@@ -17,6 +35,18 @@ function EventForm() {
   const [isVirtual, setIsVirtual] = useState(false);
   const [isPublic, setIsPublic] = useState(true);
   const [description, setDescription] = useState('');
+
+  useEffect(() => {
+    if (event != null) {
+      setName(event.name);
+      setDate(event.date);
+      setLength(event.length);
+      setLocation(event.location);
+      setIsVirtual(event.virtual);
+      setIsPublic(event.public);
+      setDescription(event.description || '');
+    }
+  }, [event]);
 
   const { addNotification } = useNotifications();
 
@@ -31,26 +61,26 @@ function EventForm() {
     /** @type {import("preact").JSX.TargetedEvent<HTMLFormElement, Event>} */ e,
   ) => {
     e.preventDefault();
-    /**
-     * @type {import('../..').Event}
-     */
-    const event = {
+    const eventId = editMode === EditMode.CREATE ? 0 : event.eventId;
+    const eventData = {
+      eventId,
       name,
-      date: date.getTime(),
+      date,
       length,
       location,
       virtual: isVirtual,
       public: isPublic,
+      description,
     };
-    const rv = await createEvent(
-      event,
-      tokens.csrfAccessToken,
-      tokens.csrfRefreshToken,
-    );
+    const func = EDITMODE_MAP[editMode];
+    const rv = await func(eventData, tokens.csrfAccessToken, tokens.csrfRefreshToken);
     if (rv.resp.ok) {
       const flash = {
         style: NotificationStyle.SUCCESS,
-        text: text.createevent.messages.success,
+        text:
+          editMode === EditMode.CREATE
+            ? text.createevent.messages.success
+            : text.editevent.messages.success,
       };
       addNotification(flash);
       loc.route(Routes.EVENTS);
@@ -127,5 +157,3 @@ function EventForm() {
     </div>
   );
 }
-
-export { EventForm };

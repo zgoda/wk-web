@@ -46,6 +46,7 @@ export interface Event {
 
 export interface EventData {
   id: string;
+  eventId?: number;
   user?: User;
   created?: Date;
   name: string;

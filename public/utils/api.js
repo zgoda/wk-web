@@ -10,7 +10,7 @@ const ENDPOINTS = new Map([
  * @param {any} value
  * @returns {any}
  */
-export function dateReviver(key, value) {
+function eventReviver(key, value) {
   if (['date', 'created'].includes(key)) {
     return new Date(parseInt(value.toString(), 10));
   }
@@ -18,25 +18,55 @@ export function dateReviver(key, value) {
 }
 
 /**
+ * @param {import('../..').EventData} event
+ * @returns {import('../..').Event}
+ */
+function serializeEventData(event) {
+  return {
+    name: event.name,
+    date: event.date.getTime(),
+    length: event.length,
+    location: event.location,
+    virtual: event.virtual,
+    public: event.public,
+    description: event.description,
+  };
+}
+
+/**
  * @returns {Promise<ReadonlyArray<import('../..').EventData>>}
  */
-async function fetchEvents() {
+export async function fetchEvents() {
   const url = ENDPOINTS.get('event.collection');
   const result = await request.get(url);
   const text = await result.resp.text();
-  const data = JSON.parse(text, dateReviver);
+  const data = JSON.parse(text, eventReviver);
   return data.collection;
 }
 
 /**
- * @param {import('../..').Event} event
+ * @param {import('../..').EventData} event
  * @param {string} csrfAccessToken
  * @param {string} csrfRefreshToken
  * @returns {Promise<import('../..').RequestResult>}
  */
-async function createEvent(event, csrfAccessToken, csrfRefreshToken) {
+export async function createEvent(event, csrfAccessToken, csrfRefreshToken) {
   const url = ENDPOINTS.get('event.collection');
-  const result = await request.post(url, event, csrfAccessToken, csrfRefreshToken);
+  const payload = serializeEventData(event);
+  const result = await request.post(url, payload, csrfAccessToken, csrfRefreshToken);
+  return result;
+}
+
+/**
+ * @param {import('../..').EventData} event
+ * @param {string} csrfAccessToken
+ * @param {string} csrfRefreshToken
+ * @returns {Promise<import('../..').RequestResult>}
+ */
+export async function updateEvent(event, csrfAccessToken, csrfRefreshToken) {
+  const url = `${ENDPOINTS.get('event.item')}/${event.eventId}`;
+  const payload = serializeEventData(event);
+  const result = await request.put(url, payload, csrfAccessToken, csrfRefreshToken);
   return result;
 }
 
@@ -44,12 +74,10 @@ async function createEvent(event, csrfAccessToken, csrfRefreshToken) {
  * @param {number} eventId
  * @returns {Promise<import('../..').EventData>}
  */
-async function fetchEvent(eventId) {
+export async function fetchEvent(eventId) {
   const url = `${ENDPOINTS.get('event.item')}/${eventId}`;
   const result = await request.get(url);
   const text = await result.resp.text();
-  const data = JSON.parse(text, dateReviver);
+  const data = JSON.parse(text, eventReviver);
   return data.item;
 }
-
-export { fetchEvent, fetchEvents, createEvent };

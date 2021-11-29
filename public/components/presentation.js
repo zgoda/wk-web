@@ -26,7 +26,7 @@ function EventsTable({ items }) {
         {items.map((ev) => (
           <tr key={`ev-${ev.created.getTime()}-${ev.date.getTime()}`}>
             <td>
-              <a href={`${Routes.EVENT_BARE}/${ev.id}`}>{ev.name}</a>
+              <a href={`${Routes.EVENT_BARE}/${ev.eventId}`}>{ev.name}</a>
             </td>
             <td>{ev.date.toLocaleDateString()}</td>
             <td>{ev.length}</td>

@@ -15,5 +15,10 @@
     "messages": {
       "success": "Wymarsz został utworzony"
     }  
+  },
+  "editevent": {
+    "messages": {
+      "success": "Dane wymarszu zostały zmienione"
+    }
   }
 }
