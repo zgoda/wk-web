@@ -39,7 +39,12 @@ export async function updateUser(user, csrfAccessToken, csrfRefreshToken) {
  * @returns {boolean}
  */
 export function isActiveOwner(event, user) {
-  if (user.isActive && event.user != null && user.email === event.user.email) {
+  if (
+    user != null &&
+    user.isActive &&
+    event.user != null &&
+    user.email === event.user.email
+  ) {
     return true;
   }
   return false;

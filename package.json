@@ -12,7 +12,7 @@
     "@nanostores/preact": "^0.1.2",
     "@picocss/pico": "^1.4.1",
     "cookie-universal": "^2.1.5",
-    "nanostores": "^0.5.6",
+    "nanostores": "^0.5.7",
     "preact": "^10.6.2",
     "preact-feather": "^4.2.1",
     "preact-iso": "^2.3.0",
@@ -27,10 +27,10 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "http-proxy-middleware": "^2.0.1",
-    "jest": "^27.4.0",
+    "jest": "^27.4.3",
     "jest-preset-preact": "^4.0.5",
     "prettier": "^2.5.0",
-    "sass": "^1.43.5",
+    "sass": "^1.44.0",
     "wmr": "^3.7.2"
   }
 }

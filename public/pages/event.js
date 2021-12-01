@@ -42,11 +42,11 @@ function OwnerToolsRow({ event }) {
   const session = useStore(sessionStore);
   if (isActiveOwner(event, session.currentUser))
     return (
-      <div>
-        <a role="button" href={`${Routes.EDITEVENT_BARE}/${event.id}`}>
+      <article>
+        <a role="button" href={`${Routes.EDITEVENT_BARE}/${event.eventId}`}>
           {text.editButton.text}
         </a>
-      </div>
+      </article>
     );
   return null;
 }
@@ -86,18 +86,18 @@ export default function Event({ params }) {
         <hgroup>
           <h1>{event.name}</h1>
           <h2>
-            Odbędzie się {event.date.toLocaleDateString()}
+            Wymarsz odbędzie się {event.date.toLocaleDateString()}
             {event.virtual && `, ${text.virtual}`}
             {event.public && `, ${text.public}`}
           </h2>
         </hgroup>
       </header>
-      <OwnerToolsRow event={event} />
       <DisplayRow label={text.created} value={event.created.toLocaleString()} />
       <DisplayRow label={text.author} value={event.user.name} />
       <DisplayRow label={text.length} value={event.length.toString()} />
       <DisplayRow label={text.location} value={event.location} />
       {event.description && <p>{event.description}</p>}
+      <OwnerToolsRow event={event} />
     </section>
   );
 }
