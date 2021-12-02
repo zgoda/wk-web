@@ -13,6 +13,10 @@ function AuthenticationRequired() {
 
   return (
     <section>
+      <hgroup>
+        <h1>Strona dostępna po zalogowaniu</h1>
+        <h2>Prosimy przejść do strony logowania</h2>
+      </hgroup>
       <p>Ta strona jest dostępna tylko dla zalogowanych użytkowników.</p>
       <p>
         Zapraszamy na <a href={Routes.LOGIN}>stronę logowania</a>, gdzie można również

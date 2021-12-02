@@ -66,7 +66,7 @@ export async function createEvent(event, csrfAccessToken, csrfRefreshToken) {
 export async function updateEvent(event, csrfAccessToken, csrfRefreshToken) {
   const url = `${ENDPOINTS.get('event.item')}/${event.eventId}`;
   const payload = serializeEventData(event);
-  const result = await request.put(url, payload, csrfAccessToken, csrfRefreshToken);
+  const result = await request.patch(url, payload, csrfAccessToken, csrfRefreshToken);
   return result;
 }
 

@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'preact/hooks';
+import { useStore } from '@nanostores/preact';
 
 import { fetchEvent } from '../utils/api';
 import { Loading } from '../components/loading';
+import { EditMode, EventForm } from '../components/forms';
+import { sessionStore } from '../state/stores';
+import { AuthenticationRequired } from '../components/auth';
 
 /**
  * @typedef {Object} EditEventProps
@@ -18,6 +22,8 @@ export default function EditEvent({ params }) {
   const [event, setEvent] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  const session = useStore(sessionStore);
+
   useEffect(() => {
     const fetchEventData = async () => {
       setIsLoading(true);
@@ -27,6 +33,10 @@ export default function EditEvent({ params }) {
     };
     fetchEventData();
   }, [params.id]);
+
+  if (session.currentUser == null) {
+    return <AuthenticationRequired />;
+  }
 
   if (isLoading) {
     return <Loading />;
@@ -38,6 +48,7 @@ export default function EditEvent({ params }) {
         <h1>Zmiana danych wymarszu</h1>
         <h2>{event.name}</h2>
       </hgroup>
+      <EventForm editMode={EditMode.EDIT} event={event} />
     </section>
   );
 }
