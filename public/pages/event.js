@@ -6,6 +6,7 @@ import { fetchEvent } from '../utils/api';
 import { sessionStore } from '../state/stores';
 import { isActiveOwner } from '../utils/user';
 import { Routes } from '../routes';
+import { ErrorState } from '../components/errorstate';
 
 import styles from './event.module.css';
 import text from './event.json';
@@ -64,13 +65,18 @@ export default function Event({ params }) {
    * @type [import('../..').EventData, import('preact/hooks').StateUpdater<import('../..').EventData>]
    */
   const [event, setEvent] = useState(null);
+  const [hasError, setHasError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchEventData = async () => {
       setIsLoading(true);
       const rv = await fetchEvent(params.id);
-      setEvent(rv);
+      if (rv == null) {
+        setHasError(true);
+      } else {
+        setEvent(rv);
+      }
       setIsLoading(false);
     };
     fetchEventData();
@@ -78,6 +84,10 @@ export default function Event({ params }) {
 
   if (isLoading) {
     return <Loading />;
+  }
+
+  if (hasError) {
+    return <ErrorState />;
   }
 
   return (

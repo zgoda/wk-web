@@ -77,6 +77,9 @@ export async function updateEvent(event, csrfAccessToken, csrfRefreshToken) {
 export async function fetchEvent(eventId) {
   const url = `${ENDPOINTS.get('event.item')}/${eventId}`;
   const result = await request.get(url);
+  if (result.error != null) {
+    return null;
+  }
   const text = await result.resp.text();
   const data = JSON.parse(text, eventReviver);
   return data.item;

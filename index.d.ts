@@ -30,6 +30,9 @@ export interface RequestResult {
   resp: Response;
   csrfAccessToken?: string;
   csrfRefreshToken?: string;
+  error?: Readonly<{
+    message: string;
+  }>
 }
 
 export interface Event {

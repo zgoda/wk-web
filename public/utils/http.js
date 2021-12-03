@@ -112,9 +112,18 @@ async function _request(method, url, payload, csrfAccessToken, csrfRefreshToken)
   }
   /** @type {import('../..').RequestResult} */
   const rv = { resp, csrfAccessToken, csrfRefreshToken };
-  if (resp.ok && resp.status < 400 && didReauth) {
+  if (resp.ok && didReauth) {
     rv.csrfAccessToken = reauthResult.csrfAccessToken;
     rv.csrfRefreshToken = reauthResult.csrfRefreshToken;
+  }
+  if (!resp.ok) {
+    try {
+      const data = await resp.json();
+      rv.error = { message: data.message };
+    } catch (err) {
+      rv.error = { message: `Error while doing ${method} at ${url}` };
+      console.error(err);
+    }
   }
   return rv;
 }
