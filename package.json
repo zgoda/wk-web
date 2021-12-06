@@ -6,10 +6,15 @@
     "serve": "wmr serve",
     "test": "jest"
   },
+  "browserslist": [
+    "last 2 versions",
+    "> 1%",
+    "not dead"
+  ],
   "types": "./index.d.ts",
   "dependencies": {
     "@csstools/normalize.css": "^12.0.0",
-    "@nanostores/preact": "^0.1.2",
+    "@nanostores/preact": "^0.1.3",
     "@picocss/pico": "^1.4.1",
     "cookie-universal": "^2.1.5",
     "nanostores": "^0.5.7",
@@ -19,7 +24,7 @@
     "uid": "^2.0.0"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^5.15.1",
+    "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/preact": "^2.0.1",
     "eslint": "^7.32.0",
     "eslint-config-preact": "^1.2.0",
@@ -29,7 +34,7 @@
     "http-proxy-middleware": "^2.0.1",
     "jest": "^27.4.3",
     "jest-preset-preact": "^4.0.5",
-    "prettier": "^2.5.0",
+    "prettier": "^2.5.1",
     "sass": "^1.44.0",
     "wmr": "^3.7.2"
   }
