@@ -116,6 +116,7 @@ export function EventForm({ editMode, event }) {
             type="number"
             min="1"
             max="50"
+            inputMode="numeric"
             value={length}
             // @ts-ignore
             onInput={(e) => setLength(e.target.value)}

@@ -16,6 +16,7 @@ function FormBody({ email, emailSetter, password, passwordSetter, submitButtonTe
         <input
           type="text"
           value={email}
+          inputMode="email"
           // @ts-ignore
           onChange={(e) => emailSetter(e.target.value)}
           placeholder={text.form.email.label}
