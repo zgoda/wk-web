@@ -1,3 +1,4 @@
+import { Routes } from '../routes';
 import text from './footer.json';
 
 function Footer() {
@@ -6,10 +7,18 @@ function Footer() {
       <small>{text.copyright.text}</small>
       <hr />
       <div class="grid">
-        <div>{text.links.usage.text}</div>
-        <div>{text.links.privacy.text}</div>
-        <div>{text.links.misc.text}</div>
-        <div>{text.links.changes.text}</div>
+        <div>
+          <a href={Routes.USAGE}>{text.links.usage.text}</a>
+        </div>
+        <div>
+          <a href={Routes.PRIVACY}>{text.links.privacy.text}</a>
+        </div>
+        <div>
+          <a href={Routes.MISCINFO}>{text.links.misc.text}</a>
+        </div>
+        <div>
+          <a href={Routes.CHANGELOG}>{text.links.changes.text}</a>
+        </div>
       </div>
     </footer>
   );

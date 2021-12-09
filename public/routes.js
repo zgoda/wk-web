@@ -9,4 +9,8 @@ export const Routes = Object.freeze({
   EVENT_BARE: '/event',
   EDITEVENT: '/editevent/:id',
   EDITEVENT_BARE: '/editevent',
+  USAGE: '/pages/usage',
+  PRIVACY: '/pages/privacy',
+  MISCINFO: '/pages/miscinfo',
+  CHANGELOG: '/pages/changelog',
 });

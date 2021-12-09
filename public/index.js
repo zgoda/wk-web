@@ -30,6 +30,10 @@ const Events = lazy(() => import('./pages/events.js'));
 const CreateEvent = lazy(() => import('./pages/createevent.js'));
 const Event = lazy(() => import('./pages/event.js'));
 const EditEvent = lazy(() => import('./pages/editevent.js'));
+const Usage = lazy(() => import('./pages/usage.js'));
+const Privacy = lazy(() => import('./pages/privacy.js'));
+const MiscInfo = lazy(() => import('./pages/miscinfo.js'));
+const ChangeLog = lazy(() => import('./pages/changelog.js'));
 
 export function App() {
   return (
@@ -47,6 +51,10 @@ export function App() {
               <Route path={Routes.CREATEEVENT} component={CreateEvent} />
               <Route path={Routes.EVENT} component={Event} />
               <Route path={Routes.EDITEVENT} component={EditEvent} />
+              <Route path={Routes.USAGE} component={Usage} />
+              <Route path={Routes.PRIVACY} component={Privacy} />
+              <Route path={Routes.MISCINFO} component={MiscInfo} />
+              <Route path={Routes.CHANGELOG} component={ChangeLog} />
               <Route default component={NotFound} />
             </Router>
           </ErrorBoundary>
