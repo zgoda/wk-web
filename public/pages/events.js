@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'preact/hooks';
 import { useStore } from '@nanostores/preact';
+import { useTitle } from 'hoofd/preact';
 
 import { fetchEvents } from '../utils/api';
 import { EventsTable } from '../components/presentation';
@@ -25,6 +26,7 @@ function CreateLink() {
 }
 
 export default function Events() {
+  useTitle('Lista nadchodzących wydarzeń');
   const [events, setEvents] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 

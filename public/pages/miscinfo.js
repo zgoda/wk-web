@@ -1,4 +1,7 @@
+import { useTitle } from 'hoofd/preact';
+
 export default function MiscInfo() {
+  useTitle('Informacje o aplikacji');
   return (
     <section>
       <hgroup>

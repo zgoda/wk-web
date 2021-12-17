@@ -1,6 +1,7 @@
 import { useStore } from '@nanostores/preact';
 import { useLocation } from 'preact-iso';
 import { useEffect } from 'preact/hooks';
+import { useTitle } from 'hoofd/preact';
 
 import { Routes } from '../routes';
 import { clearUser } from '../state/actions';
@@ -10,6 +11,7 @@ import { NotificationStyle, useNotifications } from '../utils/notifications';
 import text from './logout.json';
 
 export default function Logout() {
+  useTitle('Wylogowanie użytkownika z serwisu');
   const { addNotification } = useNotifications();
 
   const loc = useLocation();

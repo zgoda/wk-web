@@ -1,4 +1,7 @@
+import { useTitle } from 'hoofd/preact';
+
 export default function ChangeLog() {
+  useTitle('Dziennik zmian');
   return (
     <section>
       <hgroup>

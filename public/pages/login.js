@@ -1,5 +1,6 @@
 import { useState } from 'preact/hooks';
 import { useLocation } from 'preact-iso';
+import { useTitle } from 'hoofd/preact';
 
 import { login, register } from '../utils/auth';
 import { NotificationStyle, useNotifications } from '../utils/notifications';
@@ -37,6 +38,7 @@ function FormBody({ email, emailSetter, password, passwordSetter, submitButtonTe
 }
 
 export default function Login() {
+  useTitle('Logowanie użytkownika do serwisu');
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
   const [registerEmail, setRegisterEmail] = useState('');

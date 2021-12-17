@@ -3,6 +3,7 @@ import { createProxyMiddleware } from 'http-proxy-middleware';
 
 export default defineConfig((options) => {
   /** @type {import('wmr').Options} */
+  // @ts-ignore
   const config = {
     alias: {
       react: 'preact/compat',
@@ -23,6 +24,7 @@ export default defineConfig((options) => {
     config.middleware = [
       (req, res, next) => {
         if (req.path.match(/^\/api|auth(\/|$)/)) {
+          // @ts-ignore
           proxy(req, res, next);
         } else {
           next();

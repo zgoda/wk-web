@@ -1,4 +1,7 @@
+import { useTitle } from 'hoofd/preact';
+
 export default function Usage() {
+  useTitle('Instrukcja korzystania z serwisu');
   return (
     <section>
       <hgroup>

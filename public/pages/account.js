@@ -1,5 +1,6 @@
 import { useStore } from '@nanostores/preact';
 import { useEffect, useState } from 'preact/hooks';
+import { useTitle } from 'hoofd/preact';
 
 import { setAccessToken, setCurrentUser, setRefreshToken } from '../state/actions';
 import { sessionStore, tokenStore } from '../state/stores';
@@ -9,6 +10,7 @@ import { updateUser } from '../utils/user';
 import text from './account.json';
 
 export default function Account() {
+  useTitle('Dane konta użytkownika');
   const session = useStore(sessionStore);
   const tokens = useStore(tokenStore);
   const [name, setName] = useState('');

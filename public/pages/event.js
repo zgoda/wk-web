@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'preact/hooks';
 import { useStore } from '@nanostores/preact';
+import { useTitle } from 'hoofd/preact';
 
 import { Loading } from '../components/loading';
 import { fetchEvent } from '../utils/api';
@@ -61,6 +62,7 @@ function OwnerToolsRow({ event }) {
  * @returns {JSX.Element}
  */
 export default function Event({ params }) {
+  useTitle('Dane wydarzenia');
   /**
    * @type [import('../..').EventData, import('preact/hooks').StateUpdater<import('../..').EventData>]
    */

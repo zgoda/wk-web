@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'preact/hooks';
 import { useStore } from '@nanostores/preact';
+import { useTitle } from 'hoofd/preact';
 
 import { fetchEvent } from '../utils/api';
 import { Loading } from '../components/loading';
@@ -16,6 +17,7 @@ import { AuthenticationRequired } from '../components/auth';
  * @returns {JSX.Element}
  */
 export default function EditEvent({ params }) {
+  useTitle('Edycja danych wydarzenia');
   /**
    * @type [import('../..').EventData, import('preact/hooks').StateUpdater<import('../..').EventData>]
    */

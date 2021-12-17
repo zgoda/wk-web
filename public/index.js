@@ -8,6 +8,7 @@ import {
   hydrate,
   prerender as ssr,
 } from 'preact-iso';
+import { useTitleTemplate } from 'hoofd/preact';
 
 // components
 import { Header } from './components/header';
@@ -36,6 +37,7 @@ const MiscInfo = lazy(() => import('./pages/miscinfo.js'));
 const ChangeLog = lazy(() => import('./pages/changelog.js'));
 
 export function App() {
+  useTitleTemplate('%s | Wymarsz Kwartalny');
   return (
     <LocationProvider>
       <NotificationsProvider>

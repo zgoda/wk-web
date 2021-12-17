@@ -1,4 +1,7 @@
+import { useTitle } from 'hoofd/preact';
+
 export default function Privacy() {
+  useTitle('Deklaracja poszanowania prywatności');
   return (
     <section>
       <hgroup>

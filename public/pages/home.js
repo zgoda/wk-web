@@ -1,7 +1,10 @@
+import { useTitle } from 'hoofd/preact';
+
 import { Routes } from '../routes';
 import text from './home.json';
 
 export default function Home() {
+  useTitle('Początek');
   return (
     <>
       <section>
