@@ -33,7 +33,7 @@ async function parseAuthResponse(resp) {
     result.csrfRefreshToken = cookies.get('csrf_refresh_token');
     result.csrfAccessToken = cookies.get('csrf_access_token');
     if (data.user != null) {
-      result.user = { ...data.user };
+      result.user = Object.assign({}, data.user);
     } else {
       result.user = null;
     }

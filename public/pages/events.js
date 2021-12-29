@@ -34,7 +34,7 @@ export default function Events() {
     async function updateEvents() {
       setIsLoading(true);
       const events = await fetchEvents();
-      setEvents([...events]);
+      setEvents(events.slice());
       setIsLoading(false);
     }
     updateEvents();

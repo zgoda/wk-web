@@ -23,7 +23,7 @@ export default function Account() {
     /** @type {import("preact").JSX.TargetedEvent<HTMLFormElement, Event>} */ e,
   ) => {
     e.preventDefault();
-    const user = { ...session.currentUser };
+    const user = Object.assign({}, session.currentUser);
     user.name = name;
     const rv = await updateUser(user, tokens.csrfAccessToken, tokens.csrfRefreshToken);
     if (rv.status) {
