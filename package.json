@@ -19,7 +19,7 @@
     "cookie-universal": "^2.1.5",
     "hoofd": "^1.4.0",
     "nanostores": "^0.5.10",
-    "preact": "^10.6.5",
+    "preact": "^10.6.6",
     "preact-feather": "^4.2.1",
     "preact-iso": "^2.3.0",
     "uid": "^2.0.0"
@@ -29,14 +29,14 @@
     "@testing-library/preact": "^2.0.1",
     "eslint": "^8.9.0",
     "eslint-config-preact": "^1.3.0",
-    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-prettier": "^8.4.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "http-proxy-middleware": "^2.0.3",
     "jest": "^27.5.1",
     "jest-preset-preact": "^4.0.5",
     "prettier": "^2.5.1",
-    "sass": "^1.49.7",
+    "sass": "^1.49.8",
     "wmr": "^3.7.2"
   }
 }
