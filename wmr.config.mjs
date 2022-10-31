@@ -15,7 +15,7 @@ export default defineConfig((options) => {
       changeOrigin: true,
       ws: false,
       logLevel: 'debug',
-      target: 'http://localhost:5000',
+      target: 'http://127.0.0.1:5000',
       pathRewrite: {
         '/api': '/v1/api',
         '/auth': '/v1/auth',
